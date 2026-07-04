@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { TopNav } from '@/components/layout/TopNav'
 import { StatCard } from '@/components/shared/StatCard'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Users, Flame, TrendingUp, DollarSign } from 'lucide-react'
+import { Users, Flame, TrendingUp, DollarSign, Globe, Code, Megaphone, Headphones, Palette, Shield } from 'lucide-react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { useLeadStore } from '@/features/leads/store/useLeadStore'
 import { formatCurrency } from '@/lib/utils'
@@ -17,6 +17,15 @@ const STATUS_COLORS: Record<string, string> = {
   won: '#10B981',
   lost: '#EF4444',
 }
+
+const services = [
+  { icon: Globe, name: 'Web Development', desc: 'Custom websites & web apps', color: '#6366f1' },
+  { icon: Code, name: 'Software Solutions', desc: 'Tailored software development', color: '#2563EB' },
+  { icon: Megaphone, name: 'Digital Marketing', desc: 'SEO, ads & social media', color: '#F59E0B' },
+  { icon: Palette, name: 'UI/UX Design', desc: 'Beautiful, user-friendly interfaces', color: '#EC4899' },
+  { icon: Headphones, name: 'IT Support', desc: '24/7 technical assistance', color: '#10B981' },
+  { icon: Shield, name: 'Cybersecurity', desc: 'Protect your digital assets', color: '#EF4444' },
+]
 
 function formatTimeAgo(date: Date): string {
   const now = new Date()
@@ -164,6 +173,26 @@ export function DashboardView() {
             )}
           </CardContent>
         </Card>
+
+        {/* Services */}
+        <div>
+          <h3 className="text-sm font-semibold text-primary mb-3">Your Services</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {services.map((service) => (
+              <div key={service.name} className="rounded-lg border border-border bg-card p-4 hover:border-accent/30 transition-colors cursor-pointer">
+                <div className="flex items-start gap-3">
+                  <div className="h-10 w-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `${service.color}15` }}>
+                    <service.icon className="h-5 w-5" style={{ color: service.color }} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-semibold text-primary">{service.name}</h4>
+                    <p className="text-xs text-secondary mt-0.5">{service.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   )
