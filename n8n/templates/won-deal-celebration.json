@@ -1,0 +1,155 @@
+{
+  "name": "Won Deal Celebration",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "won-deal",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "won-deal"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "lead.status_changed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "condition-2",
+              "leftValue": "={{ $json.body.data.newStatus }}",
+              "rightValue": "won",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "filter-1",
+      "name": "Filter Won Deals",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-1",
+              "name": "leadName",
+              "value": "={{ $json.body.data.name }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-2",
+              "name": "leadCompany",
+              "value": "={{ $json.body.data.company }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-3",
+              "name": "leadValue",
+              "value": "={{ $json.body.data.value }}",
+              "type": "number"
+            },
+            {
+              "id": "assign-4",
+              "name": "message",
+              "value": "={{ '🎉 DEAL WON! ' + $json.body.data.name + ($json.body.data.company ? ' from ' + $json.body.data.company : '') + ' just converted!' + ($json.body.data.value ? ' Value: $' + $json.body.data.value : '') }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "set-1",
+      "name": "Format Celebration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "sendTo": "team@example.com",
+        "subject": "=🎉 Deal Won: {{ $json.leadName }}",
+        "message": "=Great news team!\n\n{{ $json.message }}\n\nKeep up the amazing work!",
+        "options": {}
+      },
+      "id": "email-1",
+      "name": "Notify Team",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [910, 300],
+      "credentials": {
+        "smtp": {
+          "id": "REPLACE_WITH_SMTP_CREDENTIAL_ID",
+          "name": "SMTP (Mailpit)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter Won Deals",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Won Deals": {
+      "main": [
+        [
+          {
+            "node": "Format Celebration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Celebration": {
+      "main": [
+        [
+          {
+            "node": "Notify Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "leadboost"
+    }
+  ]
+}

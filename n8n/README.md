@@ -31,14 +31,33 @@ The frontend fires these events to n8n:
 
 ## Workflow Templates
 
-Place exported workflow JSON files in `templates/`. Import them into n8n via the UI.
+Import these JSON files into n8n via **Workflows > Import from File**.
 
-### Recommended Workflows
+| Template | File | What it does |
+|----------|------|-------------|
+| **Lead Notification** | `templates/lead-notification.json` | Emails you when a new lead is captured |
+| **Follow-up Reminder** | `templates/follow-up-reminder.json` | Sends a follow-up email 3 days after lead creation |
+| **Won Deal Celebration** | `templates/won-deal-celebration.json` | Notifies team when a lead is marked "won" |
+| **Lost Lead Feedback** | `templates/lost-lead-feedback.json` | Sends a feedback survey when a lead is marked "lost" |
 
-- **Lead Notification** — Send Slack/email when a new lead arrives
-- **Follow-up Reminder** — Schedule a follow-up task 3 days after lead creation
-- **Won Deal Celebration** — Notify team when a lead is marked "won"
-- **Lost Lead Feedback** — Send a survey when a lead is marked "lost"
+### Setup Steps
+
+1. Open n8n at http://localhost:5678
+2. Create an **SMTP credential** pointing to Mailpit (host: `mailpit`, port: `1025`, no auth)
+3. Import a template: **Workflows > Import from File > select JSON**
+4. In the **Send Email** node, select the SMTP credential you created
+5. Update email addresses (`sendTo`) to your real addresses
+6. Activate the workflow
+
+### Quick Test
+
+After importing a template and configuring the credential:
+
+1. In the LeadBoost AI dashboard, go to **Automation**
+2. Set webhook URL to `http://localhost:5678/webhook/lead-notification` (or the relevant path)
+3. Enable the `lead.created` event
+4. Click **Test Webhook**
+5. Check Mailpit at http://localhost:8025 for the email
 
 ## Environment Variables
 

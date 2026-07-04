@@ -1,0 +1,155 @@
+{
+  "name": "Lost Lead Feedback Survey",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lost-lead-survey",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "lost-lead-survey"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "lead.status_changed",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "condition-2",
+              "leftValue": "={{ $json.body.data.newStatus }}",
+              "rightValue": "lost",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "filter-1",
+      "name": "Filter Lost Leads",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-1",
+              "name": "leadName",
+              "value": "={{ $json.body.data.name }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-2",
+              "name": "leadEmail",
+              "value": "={{ $json.body.data.email }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-3",
+              "name": "leadCompany",
+              "value": "={{ $json.body.data.company }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-4",
+              "name": "message",
+              "value": "=Hi {{ $json.body.data.name }},\n\nWe noticed you decided not to move forward with LeadBoost AI. We'd love to understand why so we can improve.\n\nWould you mind taking 2 minutes to answer a few quick questions?\n\n1. What was the main reason you didn't proceed?\n   - Too expensive\n   - Missing features\n   - Chose a competitor\n   - No longer need\n   - Other\n\n2. What would have made our product more appealing?\n\n3. Any other feedback?\n\nYour input helps us build a better product. Thanks!\n\nBest,\nThe LeadBoost Team",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "set-1",
+      "name": "Format Survey",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.leadEmail }}",
+        "subject": "=Quick feedback request - How can we improve?",
+        "message": "={{ $json.message }}",
+        "options": {}
+      },
+      "id": "email-1",
+      "name": "Send Survey",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [910, 300],
+      "credentials": {
+        "smtp": {
+          "id": "REPLACE_WITH_SMTP_CREDENTIAL_ID",
+          "name": "SMTP (Mailpit)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter Lost Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter Lost Leads": {
+      "main": [
+        [
+          {
+            "node": "Format Survey",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Survey": {
+      "main": [
+        [
+          {
+            "node": "Send Survey",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "leadboost"
+    }
+  ]
+}

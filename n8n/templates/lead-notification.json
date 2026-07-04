@@ -1,0 +1,158 @@
+{
+  "name": "Lead Notification",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "lead-notification",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-1",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "lead-notification"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "condition-1",
+              "leftValue": "={{ $json.body.event }}",
+              "rightValue": "lead.created",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "filter-1",
+      "name": "Filter New Leads",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "assign-1",
+              "name": "leadName",
+              "value": "={{ $json.body.data.name }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-2",
+              "name": "leadEmail",
+              "value": "={{ $json.body.data.email }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-3",
+              "name": "leadCompany",
+              "value": "={{ $json.body.data.company }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-4",
+              "name": "leadScore",
+              "value": "={{ $json.body.data.score }}",
+              "type": "number"
+            },
+            {
+              "id": "assign-5",
+              "name": "leadSource",
+              "value": "={{ $json.body.data.source }}",
+              "type": "string"
+            },
+            {
+              "id": "assign-6",
+              "name": "message",
+              "value": "=New lead captured!\n\nName: {{ $json.body.data.name }}\nEmail: {{ $json.body.data.email }}\nCompany: {{ $json.body.data.company }}\nScore: {{ $json.body.data.score }}\nSource: {{ $json.body.data.source }}\n\nTime: {{ $json.body.timestamp }}",
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "id": "set-1",
+      "name": "Format Data",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [690, 300]
+    },
+    {
+      "parameters": {
+        "sendTo": "you@example.com",
+        "subject": "=New Lead: {{ $json.leadName }} from {{ $json.leadCompany }}",
+        "message": "={{ $json.message }}",
+        "options": {}
+      },
+      "id": "email-1",
+      "name": "Send Email",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [910, 300],
+      "credentials": {
+        "smtp": {
+          "id": "REPLACE_WITH_SMTP_CREDENTIAL_ID",
+          "name": "SMTP (Mailpit)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Filter New Leads",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter New Leads": {
+      "main": [
+        [
+          {
+            "node": "Format Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Data": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "leadboost"
+    }
+  ]
+}
