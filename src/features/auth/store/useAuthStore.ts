@@ -29,7 +29,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
       const { error } = await authService.login(email, password)
       if (error) throw error
     } catch (error: any) {
-      set({ error: error.message })
+      set({ error: error.message || 'Login failed' })
       throw error
     }
   },
@@ -37,10 +37,15 @@ export const useAuthStore = create<AuthStore>((set) => ({
   register: async (email, password, name) => {
     try {
       set({ error: null })
-      const { error } = await authService.register(email, password, name)
+      const { data, error } = await authService.register(email, password, name)
       if (error) throw error
+      if (data.user && !data.session) {
+        const msg = 'Check your email to confirm your account'
+        set({ error: msg })
+        throw new Error(msg)
+      }
     } catch (error: any) {
-      set({ error: error.message })
+      set({ error: error.message || 'Registration failed' })
       throw error
     }
   },
