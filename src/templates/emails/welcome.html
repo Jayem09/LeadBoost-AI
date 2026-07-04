@@ -4,42 +4,82 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome to LeadBoost AI</title>
-  <style>
-    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
-    .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
-    .header { text-align: center; margin-bottom: 32px; }
-    .logo { font-size: 24px; font-weight: 700; color: #6366f1; }
-    .card { background: #ffffff; border-radius: 8px; border: 1px solid #e5e7eb; padding: 32px; }
-    .title { font-size: 20px; font-weight: 600; color: #111827; margin: 0 0 8px; }
-    .text { font-size: 14px; color: #6b7280; line-height: 1.6; margin: 0 0 16px; }
-    .btn { display: inline-block; background: #6366f1; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; margin: 16px 0; }
-    .footer { text-align: center; margin-top: 32px; font-size: 12px; color: #9ca3af; }
-  </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">LeadBoost AI</div>
-    </div>
-    <div class="card">
-      <h1 class="title">Welcome, {{name}}!</h1>
-      <p class="text">
-        Thanks for signing up for LeadBoost AI. You're all set to start capturing and converting leads.
-      </p>
-      <p class="text">Here's what you can do right away:</p>
-      <p class="text">
-        - Capture leads from your landing page<br>
-        - Manage your pipeline with drag-and-drop<br>
-        - Automate follow-ups with n8n integrations
-      </p>
-      <a href="{{dashboardUrl}}" class="btn">Go to Dashboard</a>
-      <p class="text">
-        If you have any questions, just reply to this email — we're here to help.
-      </p>
-    </div>
-    <div class="footer">
-      <p>LeadBoost AI &copy; 2026</p>
-    </div>
-  </div>
+<body style="margin:0;padding:0;background:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+          <!-- Logo -->
+          <tr>
+            <td style="text-align:center;padding-bottom:32px;">
+              <span style="font-size:28px;font-weight:800;color:#818cf8;letter-spacing:-0.5px;">LeadBoost</span><span style="font-size:28px;font-weight:800;color:#f8fafc;letter-spacing:-0.5px;">AI</span>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:40px;">
+              <!-- Icon -->
+              <table cellpadding="0" cellspacing="0" style="margin:0 auto 24px;">
+                <tr>
+                  <td style="background:#4f46e5;border-radius:50%;width:56px;height:56px;text-align:center;vertical-align:middle;">
+                    <span style="font-size:28px;line-height:56px;">🚀</span>
+                  </td>
+                </tr>
+              </table>
+
+              <h1 style="color:#f8fafc;font-size:24px;font-weight:700;margin:0 0 12px;text-align:center;">You're in, {{name}}!</h1>
+
+              <p style="color:#94a3b8;font-size:15px;line-height:1.7;margin:0 0 24px;text-align:center;">
+                Welcome to LeadBoost AI. Your account is ready — time to start closing deals.
+              </p>
+
+              <!-- Feature list -->
+              <table cellpadding="0" cellspacing="0" style="width:100%;margin:0 0 32px;">
+                <tr>
+                  <td style="padding:8px 0;color:#e2e8f0;font-size:14px;">
+                    <span style="color:#818cf8;margin-right:8px;">✦</span> Capture leads from your website
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 0;color:#e2e8f0;font-size:14px;">
+                    <span style="color:#818cf8;margin-right:8px;">✦</span> Visual pipeline with drag-and-drop
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 0;color:#e2e8f0;font-size:14px;">
+                    <span style="color:#818cf8;margin-right:8px;">✦</span> Automate follow-ups with n8n
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 0;color:#e2e8f0;font-size:14px;">
+                    <span style="color:#818cf8;margin-right:8px;">✦</span> Real-time analytics &amp; reporting
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA Button -->
+              <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                <tr>
+                  <td style="background:#6366f1;border-radius:8px;">
+                    <a href="{{dashboardUrl}}" style="display:inline-block;padding:14px 32px;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;">Open Dashboard →</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="text-align:center;padding:32px 0 0;">
+              <p style="color:#475569;font-size:12px;margin:0 0 8px;">LeadBoost AI — Never lose a lead again.</p>
+              <p style="color:#334155;font-size:12px;margin:0;">© 2026 LeadBoost AI. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>

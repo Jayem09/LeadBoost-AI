@@ -4,39 +4,54 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deal Won!</title>
-  <style>
-    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
-    .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
-    .header { text-align: center; margin-bottom: 32px; }
-    .logo { font-size: 24px; font-weight: 700; color: #6366f1; }
-    .card { background: #ffffff; border-radius: 8px; border: 1px solid #e5e7eb; padding: 32px; }
-    .title { font-size: 20px; font-weight: 600; color: #111827; margin: 0 0 8px; }
-    .text { font-size: 14px; color: #6b7280; line-height: 1.6; margin: 0 0 16px; }
-    .highlight { font-size: 36px; font-weight: 700; color: #10b981; text-align: center; margin: 24px 0; }
-    .btn { display: inline-block; background: #6366f1; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; margin: 16px 0; }
-    .footer { text-align: center; margin-top: 32px; font-size: 12px; color: #9ca3af; }
-  </style>
 </head>
-<body>
-  <div class="container">
-    <div class="header">
-      <div class="logo">LeadBoost AI</div>
-    </div>
-    <div class="card">
-      <h1 class="title">Deal Won!</h1>
-      <div class="highlight">&#127881;</div>
-      <p class="text">
-        <strong>{{leadName}}</strong>{{leadCompany}} just converted!
-        {{#if leadValue}}Value: ${{leadValue}}{{/if}}
-      </p>
-      <p class="text">
-        Keep up the great work, team!
-      </p>
-      <a href="{{dashboardUrl}}" class="btn">View in Pipeline</a>
-    </div>
-    <div class="footer">
-      <p>LeadBoost AI &copy; 2026</p>
-    </div>
-  </div>
+<body style="margin:0;padding:0;background:#0f172a;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f172a;padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
+          <tr>
+            <td style="text-align:center;padding-bottom:32px;">
+              <span style="font-size:28px;font-weight:800;color:#818cf8;letter-spacing:-0.5px;">LeadBoost</span><span style="font-size:28px;font-weight:800;color:#f8fafc;letter-spacing:-0.5px;">AI</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="background:#1e293b;border:1px solid #334155;border-radius:12px;padding:40px;">
+              <table cellpadding="0" cellspacing="0" style="margin:0 auto 24px;">
+                <tr>
+                  <td style="background:#10b981;border-radius:50%;width:56px;height:56px;text-align:center;vertical-align:middle;">
+                    <span style="font-size:28px;line-height:56px;">🎉</span>
+                  </td>
+                </tr>
+              </table>
+
+              <h1 style="color:#f8fafc;font-size:24px;font-weight:700;margin:0 0 12px;text-align:center;">Deal Won!</h1>
+
+              <p style="color:#10b981;font-size:36px;font-weight:700;margin:0 0 16px;text-align:center;">🏆</p>
+
+              <p style="color:#94a3b8;font-size:15px;line-height:1.7;margin:0 0 24px;text-align:center;">
+                <strong style="color:#f8fafc;">{{leadName}}</strong> {{leadCompany}} just converted!
+                {{#if leadValue}}<br>Value: <strong style="color:#10b981;">${{leadValue}}</strong>{{/if}}
+              </p>
+
+              <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
+                <tr>
+                  <td style="background:#6366f1;border-radius:8px;">
+                    <a href="{{dashboardUrl}}" style="display:inline-block;padding:14px 32px;color:#ffffff;font-size:15px;font-weight:600;text-decoration:none;">View in Pipeline →</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="text-align:center;padding:32px 0 0;">
+              <p style="color:#475569;font-size:12px;margin:0 0 8px;">LeadBoost AI — Never lose a lead again.</p>
+              <p style="color:#334155;font-size:12px;margin:0;">© 2026 LeadBoost AI. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
 </body>
 </html>
