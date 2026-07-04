@@ -27,9 +27,11 @@ export type LeadEvent =
 const WEBHOOK_LOG_KEY = 'n8n_webhook_log'
 const MAX_LOG_ENTRIES = 20
 
+const WEBHOOK_URL_KEY = 'n8n_webhook_url'
+
 function getConfig() {
   return {
-    webhookUrl: import.meta.env.VITE_N8N_WEBHOOK_URL || '',
+    webhookUrl: import.meta.env.VITE_N8N_WEBHOOK_URL || localStorage.getItem(WEBHOOK_URL_KEY) || '',
     apiUrl: import.meta.env.VITE_N8N_API_URL || '',
     apiKey: import.meta.env.VITE_N8N_API_KEY || '',
   }
@@ -88,6 +90,19 @@ async function fetchWithRetry(
   throw lastError
 }
 
+function toProxyUrl(url: string): string {
+  try {
+    const parsed = new URL(url)
+    if (parsed.hostname === 'localhost' && parsed.port === '5678') {
+      return '/n8n' + parsed.pathname + parsed.search
+    }
+    if (parsed.hostname.includes('trycloudflare.com')) {
+      return '/n8n' + parsed.pathname + parsed.search
+    }
+  } catch {}
+  return url
+}
+
 async function post(
   url: string,
   body: Record<string, unknown>,
@@ -126,7 +141,7 @@ export const automationService = {
     const { webhookUrl } = getConfig()
     if (!webhookUrl) return false
 
-    const result = await post(webhookUrl, {
+    const result = await post(toProxyUrl(webhookUrl), {
       event,
       payload,
       timestamp: new Date().toISOString(),
