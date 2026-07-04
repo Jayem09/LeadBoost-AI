@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { CheckCircle2, ArrowRight } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { CheckCircle2, ArrowRight, Clock } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
 
 const plans = [
   {
@@ -17,10 +20,11 @@ const plans = [
     ],
     cta: 'Get Started',
     highlighted: false,
+    comingSoon: false,
   },
   {
     name: 'Pro',
-    price: '$29',
+    price: '₱1,599',
     period: '/mo',
     description: 'For growing teams that need automation and analytics.',
     features: [
@@ -31,12 +35,13 @@ const plans = [
       'Up to 10 users',
       'Email + chat support',
     ],
-    cta: 'Start Free Trial',
+    cta: 'Join Waitlist',
     highlighted: true,
+    comingSoon: true,
   },
   {
     name: 'Enterprise',
-    price: '$99',
+    price: '₱4,999',
     period: '/mo',
     description: 'For teams that need full control and custom integrations.',
     features: [
@@ -48,12 +53,37 @@ const plans = [
       'Dedicated account manager',
       'Custom SLA',
     ],
-    cta: 'Contact Sales',
+    cta: 'Join Waitlist',
     highlighted: false,
+    comingSoon: true,
   },
 ]
 
 export function PricingPage() {
+  const [waitlistEmail, setWaitlistEmail] = useState('')
+  const [waitlistPlan, setWaitlistPlan] = useState('')
+  const [waitlistSubmitted, setWaitlistSubmitted] = useState(false)
+  const [waitlistLoading, setWaitlistLoading] = useState(false)
+
+  const handleWaitlist = async (plan: string) => {
+    if (!waitlistEmail) {
+      setWaitlistPlan(plan)
+      return
+    }
+    setWaitlistLoading(true)
+    try {
+      await supabase.from('waitlist').insert({
+        email: waitlistEmail,
+        plan: plan,
+      })
+      setWaitlistSubmitted(true)
+    } catch {
+      setWaitlistSubmitted(true)
+    } finally {
+      setWaitlistLoading(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Nav */}
@@ -110,14 +140,48 @@ export function PricingPage() {
                 ))}
               </ul>
 
-              <Link to="/register" className="block">
-                <Button
-                  variant={plan.highlighted ? 'primary' : 'secondary'}
-                  className="w-full"
-                >
-                  {plan.cta} <ArrowRight className="h-4 w-4 ml-2" />
-                </Button>
-              </Link>
+              {plan.comingSoon ? (
+                <div className="space-y-3">
+                  {waitlistSubmitted && waitlistPlan === plan.name ? (
+                    <div className="flex items-center gap-2 p-3 rounded-md bg-success/10 border border-success/20 text-success text-sm">
+                      <CheckCircle2 className="h-4 w-4" />
+                      You're on the list! We'll notify you.
+                    </div>
+                  ) : (
+                    <>
+                      <div className="flex gap-2">
+                        <Input
+                          type="email"
+                          placeholder="your@email.com"
+                          value={waitlistPlan === plan.name ? waitlistEmail : ''}
+                          onChange={(e) => {
+                            setWaitlistEmail(e.target.value)
+                            setWaitlistPlan(plan.name)
+                          }}
+                          className="flex-1 text-sm"
+                        />
+                        <Button
+                          size="sm"
+                          onClick={() => handleWaitlist(plan.name)}
+                          disabled={waitlistLoading || !waitlistEmail}
+                        >
+                          {waitlistLoading ? '...' : 'Notify Me'}
+                        </Button>
+                      </div>
+                      <div className="flex items-center gap-1 text-xs text-muted justify-center">
+                        <Clock className="h-3 w-3" />
+                        Coming soon — join the waitlist
+                      </div>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <Link to="/register" className="block">
+                  <Button variant="secondary" className="w-full">
+                    {plan.cta} <ArrowRight className="h-4 w-4 ml-2" />
+                  </Button>
+                </Link>
+              )}
             </div>
           ))}
         </div>
@@ -130,20 +194,20 @@ export function PricingPage() {
           <div className="space-y-6">
             {[
               {
-                q: 'Can I switch plans later?',
-                a: 'Yes. Upgrade or downgrade anytime from your settings. Changes take effect immediately with prorated billing.',
+                q: 'When will Pro and Enterprise be available?',
+                a: 'We\'re launching paid plans soon. Join the waitlist to be the first to know and get early-bird pricing.',
               },
               {
-                q: 'What payment methods do you accept?',
-                a: 'We accept all major credit cards (Visa, Mastercard, Amex) via Stripe.',
+                q: 'Can I upgrade from Starter later?',
+                a: 'Absolutely. When paid plans launch, you\'ll be able to upgrade directly from your dashboard.',
               },
               {
-                q: 'Is there a free trial?',
-                a: 'Yes. All paid plans come with a 14-day free trial. No credit card required to start.',
+                q: 'What payment methods will you accept?',
+                a: 'We plan to support credit cards, GCash, Maya, and bank transfers via PayPal.',
               },
               {
-                q: 'Can I cancel anytime?',
-                a: 'Absolutely. Cancel from your dashboard anytime — no contracts, no cancellation fees.',
+                q: 'Is there a free trial for paid plans?',
+                a: 'Yes. All paid plans will come with a 14-day free trial when they launch.',
               },
             ].map((faq) => (
               <div key={faq.q} className="rounded-lg border border-border bg-card p-5">
