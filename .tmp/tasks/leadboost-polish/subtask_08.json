@@ -1,0 +1,37 @@
+{
+  "id": "leadboost-polish-08",
+  "seq": "08",
+  "title": "Write tests for polish features",
+  "status": "pending",
+  "depends_on": ["04", "05", "06"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "TestEngineer",
+  "context_files": [
+    "src/features/notifications/",
+    "src/features/auth/",
+    "src/features/settings/"
+  ],
+  "reference_files": [
+    "src/features/notifications/",
+    "src/features/auth/",
+    "src/features/settings/"
+  ],
+  "acceptance_criteria": [
+    "Unit tests for notification store",
+    "Unit tests for role-based access control",
+    "Unit tests for API key management",
+    "Component tests for notification bell",
+    "Component tests for role guard",
+    "Test coverage > 80%"
+  ],
+  "deliverables": [
+    "src/features/notifications/__tests__/store.test.ts",
+    "src/features/auth/__tests__/useRole.test.ts",
+    "src/features/auth/__tests__/RoleGuard.test.ts",
+    "src/features/settings/__tests__/api-keys.test.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

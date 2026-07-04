@@ -1,0 +1,25 @@
+{
+  "id": "leadboost-communication-03",
+  "seq": "03",
+  "title": "Create tasks table with RLS policies",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": ["src/lib/supabase.ts"],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "tasks table with id, lead_id, title, description, assigned_to, due_date, status, priority, created_at",
+    "RLS policies for team members",
+    "Foreign key to leads and users",
+    "Status enum: pending, in_progress, completed, cancelled",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_tasks_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

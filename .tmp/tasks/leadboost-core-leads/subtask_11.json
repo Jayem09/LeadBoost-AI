@@ -1,0 +1,33 @@
+{
+  "id": "leadboost-core-leads-11",
+  "seq": "11",
+  "title": "Write integration tests for core lead features",
+  "status": "pending",
+  "depends_on": ["09", "10"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "TestEngineer",
+  "context_files": [
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/features/leads/stores/",
+    "src/features/leads/components/"
+  ],
+  "acceptance_criteria": [
+    "Unit tests for all Zustand stores",
+    "Component tests for UI components",
+    "Integration tests for Supabase operations",
+    "Test coverage > 80% for new code",
+    "All tests passing"
+  ],
+  "deliverables": [
+    "src/features/leads/__tests__/notes-store.test.ts",
+    "src/features/leads/__tests__/activities-store.test.ts",
+    "src/features/leads/__tests__/tags-store.test.ts",
+    "src/features/leads/__tests__/custom-fields-store.test.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

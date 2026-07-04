@@ -1,0 +1,25 @@
+{
+  "id": "leadboost-communication-01",
+  "seq": "01",
+  "title": "Create email_templates table with RLS policies",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": ["src/lib/supabase.ts"],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "email_templates table with id, name, subject, body, category, created_at",
+    "RLS policies for authenticated users",
+    "Support for HTML and plain text body",
+    "Template variable placeholders ({{first_name}}, etc.)",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_email_templates_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

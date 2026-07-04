@@ -1,0 +1,26 @@
+{
+  "id": "leadboost-core-leads",
+  "name": "Core Lead Management",
+  "status": "active",
+  "objective": "Implement notes, activity timeline, tags, and custom fields for leads with Supabase storage and Zustand state management",
+  "context_files": [
+    "src/lib/supabase.ts",
+    "src/stores/",
+    "src/features/"
+  ],
+  "reference_files": [
+    "src/features/leads/",
+    "src/components/ui/"
+  ],
+  "exit_criteria": [
+    "All database tables created with RLS policies",
+    "CRUD operations working for notes, activities, tags, custom fields",
+    "Zustand stores for each entity",
+    "UI components integrated into lead detail page",
+    "TypeScript strict mode, no any types"
+  ],
+  "subtask_count": 11,
+  "completed_count": 0,
+  "created_at": "2026-07-04T00:00:00Z",
+  "completed_at": null
+}

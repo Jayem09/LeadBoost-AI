@@ -27,6 +27,7 @@ const navItems = [
   { to: '/automation', icon: Zap, label: 'Automation', permission: 'manage_automation' as const },
   { to: '/integrations', icon: Link, label: 'Integrations' },
   { to: '/email-sequences', icon: Mail, label: 'Sequences' },
+  { to: '/email-templates', icon: Mail, label: 'Templates' },
 ]
 
 const bottomItems = [

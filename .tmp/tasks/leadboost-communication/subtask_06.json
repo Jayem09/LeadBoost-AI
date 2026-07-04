@@ -1,0 +1,36 @@
+{
+  "id": "leadboost-communication-06",
+  "seq": "06",
+  "title": "Build task assignment store and UI components",
+  "status": "pending",
+  "depends_on": ["03"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/stores/",
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [
+    "src/features/leads/",
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Zustand store for tasks",
+    "Task creation form with assignee picker",
+    "Due date picker with overdue highlighting",
+    "Task status management (drag or click)",
+    "Task list grouped by status",
+    "Tasks displayed on lead detail page"
+  ],
+  "deliverables": [
+    "src/features/leads/stores/tasks-store.ts",
+    "src/features/leads/components/tasks/TaskList.tsx",
+    "src/features/leads/components/tasks/TaskCard.tsx",
+    "src/features/leads/components/tasks/CreateTaskForm.tsx",
+    "src/features/leads/components/tasks/AssigneePicker.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

@@ -1,0 +1,35 @@
+{
+  "id": "leadboost-bulk-ops-04",
+  "seq": "04",
+  "title": "Implement CSV import with validation and error handling",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts",
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "File upload with drag-and-drop",
+    "Column mapping UI",
+    "Data validation (required fields, email format, etc.)",
+    "Error preview before import",
+    "Import progress indicator",
+    "Duplicate detection and handling"
+  ],
+  "deliverables": [
+    "src/features/leads/utils/csv-import.ts",
+    "src/features/leads/components/import/ImportDialog.tsx",
+    "src/features/leads/components/import/ColumnMapper.tsx",
+    "src/features/leads/components/import/ImportPreview.tsx",
+    "src/features/leads/components/import/ImportProgress.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

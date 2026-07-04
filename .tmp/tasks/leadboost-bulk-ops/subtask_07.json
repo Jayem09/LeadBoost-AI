@@ -1,0 +1,33 @@
+{
+  "id": "leadboost-bulk-ops-07",
+  "seq": "07",
+  "title": "Write tests for bulk operations and search/filter",
+  "status": "pending",
+  "depends_on": ["02", "03", "04", "06"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "TestEngineer",
+  "context_files": [
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/features/leads/utils/",
+    "src/features/leads/components/"
+  ],
+  "acceptance_criteria": [
+    "Unit tests for CSV import/export utilities",
+    "Unit tests for search and filter logic",
+    "Component tests for filter panels",
+    "Integration tests for bulk operations",
+    "Test coverage > 80%"
+  ],
+  "deliverables": [
+    "src/features/leads/__tests__/csv-import.test.ts",
+    "src/features/leads/__tests__/csv-export.test.ts",
+    "src/features/leads/__tests__/search.test.ts",
+    "src/features/leads/__tests__/filters.test.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

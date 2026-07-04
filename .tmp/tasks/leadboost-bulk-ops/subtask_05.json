@@ -1,0 +1,33 @@
+{
+  "id": "leadboost-bulk-ops-05",
+  "seq": "05",
+  "title": "Implement full-text search across leads",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts",
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Search by name, email, company",
+    "Debounced search input",
+    "Search results highlighting",
+    "Search across custom field values",
+    "Search history/suggestions"
+  ],
+  "deliverables": [
+    "src/features/leads/utils/search.ts",
+    "src/features/leads/components/search/SearchInput.tsx",
+    "src/features/leads/components/search/SearchResults.tsx",
+    "src/features/leads/stores/search-store.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

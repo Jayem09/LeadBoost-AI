@@ -1,0 +1,35 @@
+{
+  "id": "leadboost-polish-05",
+  "seq": "05",
+  "title": "Build role-based access control system",
+  "status": "pending",
+  "depends_on": ["03"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/stores/",
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [
+    "src/features/",
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "useRole hook for checking current user role",
+    "RoleGuard component for conditional rendering",
+    "Admin: full access, can manage users and settings",
+    "Manager: can edit leads, assign tasks, view reports",
+    "Viewer: read-only access to leads and reports",
+    "Settings page for role management (admin only)"
+  ],
+  "deliverables": [
+    "src/features/auth/hooks/useRole.ts",
+    "src/features/auth/components/RoleGuard.tsx",
+    "src/features/auth/stores/roles-store.ts",
+    "src/features/settings/RoleManagement.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

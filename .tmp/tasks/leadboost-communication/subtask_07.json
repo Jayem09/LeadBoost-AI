@@ -1,0 +1,32 @@
+{
+  "id": "leadboost-communication-07",
+  "seq": "07",
+  "title": "Write tests for communication features",
+  "status": "pending",
+  "depends_on": ["05", "06"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "TestEngineer",
+  "context_files": [
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/features/leads/stores/",
+    "src/features/leads/components/"
+  ],
+  "acceptance_criteria": [
+    "Unit tests for email template store",
+    "Unit tests for sequence builder logic",
+    "Unit tests for task store",
+    "Component tests for template editor",
+    "Test coverage > 80%"
+  ],
+  "deliverables": [
+    "src/features/leads/__tests__/email-templates.test.ts",
+    "src/features/leads/__tests__/sequences.test.ts",
+    "src/features/leads/__tests__/tasks.test.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

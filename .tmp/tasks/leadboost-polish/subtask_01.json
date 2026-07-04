@@ -1,0 +1,26 @@
+{
+  "id": "leadboost-polish-01",
+  "seq": "01",
+  "title": "Create notifications table with RLS and real-time subscription",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "notifications table with id, user_id, type, message, read, created_at",
+    "RLS policies: users only see their own notifications",
+    "Supabase real-time subscription enabled",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_notifications_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

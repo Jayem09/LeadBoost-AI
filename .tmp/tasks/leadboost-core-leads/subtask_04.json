@@ -1,0 +1,25 @@
+{
+  "id": "leadboost-core-leads-04",
+  "seq": "04",
+  "title": "Create custom_fields and custom_field_values tables with RLS",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": ["src/lib/supabase.ts"],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "custom_fields table with id, name, type (text/number/select/date/boolean), options (jsonb), created_at",
+    "custom_field_values table with id, lead_id, field_id, value (text)",
+    "RLS policies for both tables",
+    "Foreign keys to leads and custom_fields",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_custom_fields_tables.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "leadboost-bulk-ops-03",
+  "seq": "03",
+  "title": "Implement CSV export with column selection",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts",
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Export all or filtered leads",
+    "Column selection dialog",
+    "Include custom fields in export",
+    "Download as .csv file",
+    "Proper CSV escaping and encoding"
+  ],
+  "deliverables": [
+    "src/features/leads/utils/csv-export.ts",
+    "src/features/leads/components/export/ExportDialog.tsx",
+    "src/features/leads/components/export/ColumnSelector.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

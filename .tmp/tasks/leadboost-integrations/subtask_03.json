@@ -1,0 +1,30 @@
+{
+  "id": "leadboost-integrations-03",
+  "seq": "03",
+  "title": "Build unified email sending abstraction",
+  "status": "pending",
+  "depends_on": ["01", "02"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/features/leads/integrations/"
+  ],
+  "reference_files": [
+    "src/features/leads/"
+  ],
+  "acceptance_criteria": [
+    "Unified interface for sending emails",
+    "Provider selection (Gmail/Outlook)",
+    "Fallback handling when provider unavailable",
+    "Email sent activity logging",
+    "Error handling and retry logic"
+  ],
+  "deliverables": [
+    "src/features/leads/integrations/email-service.ts",
+    "src/features/leads/integrations/types.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

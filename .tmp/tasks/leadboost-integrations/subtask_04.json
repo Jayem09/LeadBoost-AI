@@ -1,0 +1,31 @@
+{
+  "id": "leadboost-integrations-04",
+  "seq": "04",
+  "title": "Implement Slack webhook integration",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [
+    "src/features/leads/"
+  ],
+  "acceptance_criteria": [
+    "Slack webhook URL configuration",
+    "Hot lead notification to Slack channel",
+    "Deal stage change notifications",
+    "Customizable notification templates",
+    "Test webhook functionality"
+  ],
+  "deliverables": [
+    "src/features/leads/integrations/slack/notify.ts",
+    "src/features/leads/integrations/slack/types.ts",
+    "src/features/leads/components/integrations/SlackConfig.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

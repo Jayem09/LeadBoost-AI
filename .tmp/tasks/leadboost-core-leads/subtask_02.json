@@ -1,0 +1,24 @@
+{
+  "id": "leadboost-core-leads-02",
+  "seq": "02",
+  "title": "Create activities table with RLS policies in Supabase",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": ["src/lib/supabase.ts"],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "activities table created with columns: id, lead_id, type, description, metadata (jsonb), created_at",
+    "RLS policies allow authenticated users to read/write activities for their org",
+    "Foreign key to leads table exists",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_activities_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

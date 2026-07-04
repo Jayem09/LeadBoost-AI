@@ -1,0 +1,31 @@
+{
+  "id": "leadboost-core-leads-09",
+  "seq": "09",
+  "title": "Integrate all components into lead detail page",
+  "status": "pending",
+  "depends_on": ["05", "06", "07", "08"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/features/leads/components/",
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Lead detail page shows tabs: Notes, Activity, Custom Fields",
+    "Tags displayed in lead header",
+    "All components properly integrated",
+    "Responsive layout works on mobile",
+    "Loading states for async operations"
+  ],
+  "deliverables": [
+    "src/features/leads/components/LeadDetailPage.tsx",
+    "src/features/leads/components/LeadDetailTabs.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

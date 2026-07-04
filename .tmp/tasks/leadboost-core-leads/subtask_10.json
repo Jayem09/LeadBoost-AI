@@ -1,0 +1,29 @@
+{
+  "id": "leadboost-core-leads-10",
+  "seq": "10",
+  "title": "Add activity logging for lead mutations",
+  "status": "pending",
+  "depends_on": ["06"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/features/leads/stores/"
+  ],
+  "reference_files": [
+    "src/features/leads/"
+  ],
+  "acceptance_criteria": [
+    "Auto-log when lead status changes",
+    "Auto-log when lead is assigned",
+    "Auto-log when tags are added/removed",
+    "Auto-log when custom field values change",
+    "Activity metadata captures old/new values"
+  ],
+  "deliverables": [
+    "src/features/leads/utils/activity-logger.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

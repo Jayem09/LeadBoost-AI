@@ -1,0 +1,26 @@
+{
+  "id": "leadboost-polish-02",
+  "seq": "02",
+  "title": "Create api_keys table with RLS",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "api_keys table with id, user_id, key (hashed), name, last_used, created_at",
+    "RLS policies: users manage their own keys",
+    "Key generation with proper entropy",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_api_keys_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

@@ -1,0 +1,36 @@
+{
+  "id": "leadboost-bulk-ops-06",
+  "seq": "06",
+  "title": "Build advanced filter components (tags, date, score, custom fields)",
+  "status": "pending",
+  "depends_on": ["05"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/stores/",
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Filter by tags (multi-select)",
+    "Filter by date range (created, updated)",
+    "Filter by lead score range",
+    "Filter by custom field values",
+    "Combined filter logic (AND/OR)",
+    "Save/load filter presets"
+  ],
+  "deliverables": [
+    "src/features/leads/components/filters/FilterPanel.tsx",
+    "src/features/leads/components/filters/TagFilter.tsx",
+    "src/features/leads/components/filters/DateRangeFilter.tsx",
+    "src/features/leads/components/filters/ScoreRangeFilter.tsx",
+    "src/features/leads/components/filters/CustomFieldFilter.tsx",
+    "src/features/leads/stores/filters-store.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

@@ -1,0 +1,32 @@
+{
+  "id": "leadboost-integrations-01",
+  "seq": "01",
+  "title": "Implement Gmail OAuth integration",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [
+    "src/features/leads/"
+  ],
+  "acceptance_criteria": [
+    "Google OAuth flow for Gmail access",
+    "Store access/refresh tokens securely",
+    "Send email via Gmail API",
+    "Connection status indicator",
+    "Disconnect/reconnect functionality"
+  ],
+  "deliverables": [
+    "src/features/leads/integrations/gmail/auth.ts",
+    "src/features/leads/integrations/gmail/send.ts",
+    "src/features/leads/integrations/gmail/types.ts",
+    "src/features/leads/components/integrations/GmailConnector.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

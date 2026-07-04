@@ -1,0 +1,34 @@
+{
+  "id": "leadboost-core-leads-07",
+  "seq": "07",
+  "title": "Build tags Zustand store and tag management UI",
+  "status": "pending",
+  "depends_on": ["03"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/stores/",
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [
+    "src/features/leads/",
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Zustand store for tags and lead-tag associations",
+    "Tag picker component (multi-select)",
+    "Tag creation modal with color picker",
+    "Tag badge component with color",
+    "Assign/remove tags from lead"
+  ],
+  "deliverables": [
+    "src/features/leads/stores/tags-store.ts",
+    "src/features/leads/components/tags/TagPicker.tsx",
+    "src/features/leads/components/tags/TagBadge.tsx",
+    "src/features/leads/components/tags/CreateTagModal.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

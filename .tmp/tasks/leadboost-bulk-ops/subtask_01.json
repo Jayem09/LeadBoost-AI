@@ -1,0 +1,32 @@
+{
+  "id": "leadboost-bulk-ops-01",
+  "seq": "01",
+  "title": "Build bulk selection state management and UI",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/stores/",
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Checkbox column in lead table",
+    "Select all / deselect all functionality",
+    "Bulk selection state in Zustand store",
+    "Selected count indicator",
+    "Clear selection button"
+  ],
+  "deliverables": [
+    "src/features/leads/stores/bulk-selection-store.ts",
+    "src/features/leads/components/bulk/BulkSelectionBar.tsx",
+    "src/features/leads/components/bulk/SelectAllCheckbox.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

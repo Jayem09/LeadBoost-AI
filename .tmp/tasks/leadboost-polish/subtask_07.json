@@ -1,0 +1,34 @@
+{
+  "id": "leadboost-polish-07",
+  "seq": "07",
+  "title": "Configure PWA manifest and service worker",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "vite.config.ts",
+    "package.json"
+  ],
+  "reference_files": [
+    "public/",
+    "src/"
+  ],
+  "acceptance_criteria": [
+    "manifest.json with app name, icons, theme colors",
+    "Service worker for offline caching",
+    "Install prompt handling",
+    "App icons for all platforms (192x192, 512x512)",
+    "Vite PWA plugin configured"
+  ],
+  "deliverables": [
+    "public/manifest.json",
+    "public/icons/",
+    "src/sw.ts",
+    "vite.config.ts (updated)"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

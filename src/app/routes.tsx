@@ -10,6 +10,7 @@ const PipelineView = lazy(() => import('@/features/pipeline/components/PipelineV
 const AnalyticsView = lazy(() => import('@/features/analytics/components/AnalyticsView').then(m => ({ default: m.AnalyticsView })))
 const AutomationView = lazy(() => import('@/features/automation/components/AutomationView').then(m => ({ default: m.AutomationView })))
 const EmailSequencesView = lazy(() => import('@/features/email-sequences/components/EmailSequencesView').then(m => ({ default: m.EmailSequencesView })))
+const EmailTemplatesView = lazy(() => import('@/features/email-templates/components/EmailTemplatesView').then(m => ({ default: m.EmailTemplatesView })))
 const SettingsView = lazy(() => import('@/features/settings/components/SettingsView').then(m => ({ default: m.SettingsView })))
 const TasksView = lazy(() => import('@/features/tasks/components/TasksView').then(m => ({ default: m.TasksView })))
 const IntegrationsView = lazy(() => import('@/features/integrations/components/IntegrationsView').then(m => ({ default: m.IntegrationsView })))
@@ -34,6 +35,8 @@ export const protectedRoutes = [
   { path: '/analytics', element: <AnalyticsView /> },
   { path: '/tasks', element: <TasksView /> },
   { path: '/automation', element: <AutomationView /> },
+  { path: '/email-sequences', element: <EmailSequencesView /> },
+  { path: '/email-templates', element: <EmailTemplatesView /> },
   { path: '/integrations', element: <IntegrationsView /> },
   { path: '/settings', element: <SettingsView /> },
 ]

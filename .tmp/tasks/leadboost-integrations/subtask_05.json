@@ -1,0 +1,32 @@
+{
+  "id": "leadboost-integrations-05",
+  "seq": "05",
+  "title": "Implement calendar link generation",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Generate Google Calendar meeting links",
+    "Generate Outlook calendar meeting links",
+    "Pre-fill meeting details (attendees, title, description)",
+    "Copy link to clipboard",
+    "Embed in email templates as variable"
+  ],
+  "deliverables": [
+    "src/features/leads/integrations/calendar/google.ts",
+    "src/features/leads/integrations/calendar/outlook.ts",
+    "src/features/leads/integrations/calendar/types.ts",
+    "src/features/leads/components/integrations/CalendarLinkGenerator.tsx"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

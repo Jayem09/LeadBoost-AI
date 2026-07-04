@@ -1,0 +1,24 @@
+{
+  "id": "leadboost-core-leads-01",
+  "seq": "01",
+  "title": "Create notes table with RLS policies in Supabase",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": ["src/lib/supabase.ts"],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "notes table created with columns: id, lead_id, content, created_by, created_at",
+    "RLS policies allow authenticated users to CRUD notes for their org",
+    "Foreign key to leads table exists",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_notes_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

@@ -1,0 +1,25 @@
+{
+  "id": "leadboost-core-leads-03",
+  "seq": "03",
+  "title": "Create tags and lead_tags tables with RLS policies",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": ["src/lib/supabase.ts"],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "tags table created with columns: id, name, color, created_at",
+    "lead_tags junction table created with lead_id, tag_id",
+    "RLS policies for both tables",
+    "Unique constraint on tag name per org",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_tags_tables.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

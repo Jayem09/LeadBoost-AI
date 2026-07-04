@@ -1,0 +1,26 @@
+{
+  "id": "leadboost-polish",
+  "name": "Polish & Infrastructure",
+  "status": "active",
+  "objective": "Add notifications, RBAC, PWA support, and API key management",
+  "context_files": [
+    "src/lib/supabase.ts",
+    "src/stores/",
+    "src/features/"
+  ],
+  "reference_files": [
+    "src/features/",
+    "src/components/ui/",
+    "public/"
+  ],
+  "exit_criteria": [
+    "In-app notifications with real-time updates",
+    "Role-based access control (admin, manager, viewer)",
+    "PWA installable on mobile devices",
+    "API key generation and management"
+  ],
+  "subtask_count": 8,
+  "completed_count": 0,
+  "created_at": "2026-07-04T00:00:00Z",
+  "completed_at": null
+}

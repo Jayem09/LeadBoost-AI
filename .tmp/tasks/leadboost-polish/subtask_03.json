@@ -1,0 +1,27 @@
+{
+  "id": "leadboost-polish-03",
+  "seq": "03",
+  "title": "Create roles/user_roles tables with RLS",
+  "status": "pending",
+  "depends_on": [],
+  "parallel": true,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/lib/supabase.ts"
+  ],
+  "reference_files": [],
+  "acceptance_criteria": [
+    "user_roles table with user_id, role (admin/manager/viewer), org_id",
+    "RLS policies for role management",
+    "Default role assignment on signup",
+    "Role hierarchy: admin > manager > viewer",
+    "Migration file generated"
+  ],
+  "deliverables": [
+    "supabase/migrations/xxxx_create_user_roles_table.sql"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}

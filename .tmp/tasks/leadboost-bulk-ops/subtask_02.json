@@ -1,0 +1,35 @@
+{
+  "id": "leadboost-bulk-ops-02",
+  "seq": "02",
+  "title": "Implement bulk actions (move, delete, email, tag)",
+  "status": "pending",
+  "depends_on": ["01"],
+  "parallel": false,
+  "agent_id": null,
+  "suggested_agent": "CoderAgent",
+  "context_files": [
+    "src/stores/",
+    "src/lib/supabase.ts",
+    "src/features/leads/"
+  ],
+  "reference_files": [
+    "src/components/ui/"
+  ],
+  "acceptance_criteria": [
+    "Bulk delete with confirmation dialog",
+    "Bulk move to status/pipeline stage",
+    "Bulk add/remove tags",
+    "Bulk assign to team member",
+    "Progress indicator for bulk operations",
+    "Undo capability for bulk delete"
+  ],
+  "deliverables": [
+    "src/features/leads/components/bulk/BulkActionsMenu.tsx",
+    "src/features/leads/components/bulk/BulkDeleteDialog.tsx",
+    "src/features/leads/components/bulk/BulkTagDialog.tsx",
+    "src/features/leads/utils/bulk-operations.ts"
+  ],
+  "started_at": null,
+  "completed_at": null,
+  "completion_summary": null
+}
