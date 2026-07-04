@@ -6,8 +6,17 @@ const PipelineView = lazy(() => import('@/features/pipeline/components/PipelineV
 const AnalyticsView = lazy(() => import('@/features/analytics/components/AnalyticsView').then(m => ({ default: m.AnalyticsView })))
 const AutomationView = lazy(() => import('@/features/automation/components/AutomationView').then(m => ({ default: m.AutomationView })))
 const SettingsView = lazy(() => import('@/features/settings/components/SettingsView').then(m => ({ default: m.SettingsView })))
+const LoginForm = lazy(() => import('@/features/auth/components/LoginForm').then(m => ({ default: m.LoginForm })))
+const RegisterForm = lazy(() => import('@/features/auth/components/RegisterForm').then(m => ({ default: m.RegisterForm })))
+const ForgotPasswordForm = lazy(() => import('@/features/auth/components/ForgotPasswordForm').then(m => ({ default: m.ForgotPasswordForm })))
 
-export const routes = [
+export const publicRoutes = [
+  { path: '/login', element: <LoginForm /> },
+  { path: '/register', element: <RegisterForm /> },
+  { path: '/forgot-password', element: <ForgotPasswordForm /> },
+]
+
+export const protectedRoutes = [
   { path: '/', element: <DashboardView /> },
   { path: '/leads', element: <LeadsView /> },
   { path: '/pipeline', element: <PipelineView /> },
