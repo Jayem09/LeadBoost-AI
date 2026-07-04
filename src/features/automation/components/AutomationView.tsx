@@ -9,10 +9,8 @@ import {
   setWebhookUrl,
   getWebhookEvents,
   setWebhookEvents,
-  getWebhookLog,
-  fireWebhook,
-  type WebhookLog,
 } from '@/lib/webhook'
+import { automationService, getWebhookLog, type WebhookLog } from '@/services'
 
 const ALL_EVENTS = ['lead.created', 'lead.status_changed', 'lead.updated', 'lead.deleted']
 
@@ -47,7 +45,7 @@ export function AutomationView() {
 
   const handleTest = async () => {
     setTesting(true)
-    await fireWebhook('lead.created', {
+    await automationService.sendLeadWebhook('lead.created', {
       name: 'Test Lead',
       email: 'test@example.com',
       company: 'Test Co',

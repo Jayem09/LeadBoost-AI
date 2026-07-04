@@ -6,3 +6,10 @@ dist/
 *.log
 .DS_Store
 .superpowers/
+
+# Docker volumes
+n8n_data/
+redis_data/
+
+# n8n runtime data (keep folder structure, ignore data)
+n8n/*.db

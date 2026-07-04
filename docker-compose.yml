@@ -1,0 +1,49 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: leadboost-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - GENERIC_TIMEZONE=Asia/Manila
+      - TZ=Asia/Manila
+      - N8N_SECURE_COOKIE=false
+    volumes:
+      - n8n_data:/home/node/.n8n
+    networks:
+      - leadboost
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: leadboost-mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      - TZ=Asia/Manila
+    networks:
+      - leadboost
+
+  redis:
+    image: redis:7-alpine
+    container_name: leadboost-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - leadboost
+
+volumes:
+  n8n_data:
+  redis_data:
+
+networks:
+  leadboost:
+    driver: bridge
