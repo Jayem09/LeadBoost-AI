@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase'
+import { fireWebhook } from '@/lib/webhook'
 import type { Lead, LeadStatus } from '@/types'
 
 const TABLE = 'leads'
@@ -66,6 +67,7 @@ export const leadService = {
       .select()
       .single()
     if (error) throw error
+    fireWebhook('lead.created', data)
     return data
   },
 
@@ -90,6 +92,7 @@ export const leadService = {
       .update(updateData)
       .eq('id', id)
     if (error) throw error
+    fireWebhook('lead.updated', { id, ...updateData })
   },
 
   delete: async (id: string) => {
@@ -98,6 +101,7 @@ export const leadService = {
       .delete()
       .eq('id', id)
     if (error) throw error
+    fireWebhook('lead.deleted', { id })
   },
 
   updateStatus: async (id: string, status: LeadStatus) => {
@@ -106,5 +110,6 @@ export const leadService = {
       .update({ status })
       .eq('id', id)
     if (error) throw error
+    fireWebhook('lead.status_changed', { id, status })
   },
 }

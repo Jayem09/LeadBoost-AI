@@ -16,7 +16,7 @@ export function LoginForm() {
     e.preventDefault()
     try {
       await login(email, password)
-      navigate('/')
+      navigate('/dashboard')
     } catch {
       // Error handled by store
     }

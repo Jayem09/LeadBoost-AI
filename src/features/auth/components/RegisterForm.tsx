@@ -17,7 +17,7 @@ export function RegisterForm() {
     e.preventDefault()
     try {
       await register(email, password, name)
-      navigate('/')
+      navigate('/dashboard')
     } catch {
       // Error handled by store
     }

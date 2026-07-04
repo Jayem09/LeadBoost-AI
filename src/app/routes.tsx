@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 
+const LandingPage = lazy(() => import('@/features/landing/components/LandingPage').then(m => ({ default: m.LandingPage })))
 const DashboardView = lazy(() => import('@/features/dashboard/components/DashboardView').then(m => ({ default: m.DashboardView })))
 const LeadsView = lazy(() => import('@/features/leads/components/LeadsView').then(m => ({ default: m.LeadsView })))
 const LeadDetail = lazy(() => import('@/features/leads/components/LeadDetail').then(m => ({ default: m.LeadDetail })))
@@ -12,13 +13,14 @@ const RegisterForm = lazy(() => import('@/features/auth/components/RegisterForm'
 const ForgotPasswordForm = lazy(() => import('@/features/auth/components/ForgotPasswordForm').then(m => ({ default: m.ForgotPasswordForm })))
 
 export const publicRoutes = [
+  { path: '/', element: <LandingPage /> },
   { path: '/login', element: <LoginForm /> },
   { path: '/register', element: <RegisterForm /> },
   { path: '/forgot-password', element: <ForgotPasswordForm /> },
 ]
 
 export const protectedRoutes = [
-  { path: '/', element: <DashboardView /> },
+  { path: '/dashboard', element: <DashboardView /> },
   { path: '/leads', element: <LeadsView /> },
   { path: '/leads/:id', element: <LeadDetail /> },
   { path: '/pipeline', element: <PipelineView /> },

@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
 const navItems = [
-  { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
+  { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/leads', icon: Users, label: 'Leads' },
   { to: '/pipeline', icon: GitBranch, label: 'Pipeline' },
   { to: '/analytics', icon: BarChart3, label: 'Analytics' },
@@ -51,7 +51,7 @@ export function Sidebar() {
           <NavLink
             key={item.to}
             to={item.to}
-            end={item.to === '/'}
+            end={item.to === '/dashboard'}
             className={({ isActive }) =>
               cn(
                 'flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors',
