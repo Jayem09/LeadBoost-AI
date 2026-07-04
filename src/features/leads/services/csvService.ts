@@ -1,24 +1,5 @@
 import type { Lead, LeadStatus } from '@/types'
 
-/** CSV column headers mapping to Lead fields */
-const FIELD_MAP: Record<string, keyof Lead> = {
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  company: 'company',
-  budget: 'budget',
-  industry: 'industry',
-  service_needed: 'serviceNeeded',
-  serviceNeeded: 'serviceNeeded',
-  timeline: 'timeline',
-  status: 'status',
-  tags: 'tags',
-  notes: 'notes',
-  lead_score: 'leadScore',
-  leadScore: 'leadScore',
-  source: 'source',
-}
-
 /** Available export columns for selection */
 export const EXPORT_COLUMNS = [
   { key: 'name', label: 'Name' },

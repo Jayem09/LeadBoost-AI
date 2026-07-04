@@ -18,7 +18,6 @@ export function CalendarConfigComponent() {
   const generatedLinks = useMemo(() => {
     if (!config) return { google: '', outlook: '' }
 
-    const baseUrl = window.location.origin
     const params = new URLSearchParams({
       leadName: '{{lead_name}}',
       leadEmail: '{{lead_email}}',

@@ -7,6 +7,7 @@ type Permission =
   | 'manage_settings'
   | 'view_analytics'
   | 'manage_automation'
+  | 'view_leads'
 
 interface Role {
   id: string

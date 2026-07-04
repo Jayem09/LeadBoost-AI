@@ -5,8 +5,8 @@ import { Input } from '@/components/ui/input'
 import { supabase } from '@/lib/supabase'
 import {
   Database, GitBranch, Zap, ArrowRight, CheckCircle2, Mail, Building2, Phone, DollarSign,
-  BarChart3, Shield, Users, Brain, ChevronDown, ChevronUp, Star, Quote, Sparkles, Target,
-  TrendingUp, Clock, MessageSquare
+  BarChart3, Users, Brain, ChevronDown, ChevronUp, Star, Quote, Sparkles, Target,
+  TrendingUp
 } from 'lucide-react'
 
 const features = [

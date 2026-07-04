@@ -36,17 +36,7 @@ function getKeyPrefix(fullKey: string): string {
   return fullKey.slice(-4)
 }
 
-function mapRow(row: Record<string, unknown>): ApiKey {
-  return {
-    id: row.id as string,
-    name: row.name as string,
-    keyPrefix: row.key_prefix as string,
-    lastUsedAt: row.last_used_at ? new Date(row.last_used_at as string) : null,
-    createdAt: new Date(row.created_at as string),
-  }
-}
-
-export const useApiKeyStore = create<ApiKeyStore>((set) => ({
+export const useApiKeyStore = create<ApiKeyStore>((set, get) => ({
   apiKeys: [],
   loading: false,
   error: null,
@@ -90,7 +80,7 @@ export const useApiKeyStore = create<ApiKeyStore>((set) => ({
       if (error) throw error
 
       // Refetch to get the persisted row with id and created_at
-      await useApiKeyStore.getState().fetchKeys()
+      await get().fetchKeys()
 
       return fullKey
     } catch (error: unknown) {
@@ -115,8 +105,7 @@ export const useApiKeyStore = create<ApiKeyStore>((set) => ({
     }
   },
 
-  revokeKey: async (id: string) => {
-    // Revoke = delete in this context (same as deleteKey, but semantically distinct for future revocation logic)
-    return useApiKeyStore.getState().deleteKey(id)
+  revokeKey: async (id: string): Promise<void> => {
+    return get().deleteKey(id)
   },
 }))

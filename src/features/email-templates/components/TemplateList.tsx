@@ -110,7 +110,7 @@ function TemplateForm({ editingId, onClose }: { editingId: string | null; onClos
           onChange={(e) => setBody(e.target.value)}
         />
         <div className="flex gap-2 justify-end">
-          <Button variant="outline" size="sm" onClick={onClose}>Cancel</Button>
+          <Button variant="secondary" size="sm" onClick={onClose}>Cancel</Button>
           <Button size="sm" onClick={handleSave} disabled={saving || !name || !subject || !body}>
             {saving ? 'Saving...' : 'Save Template'}
           </Button>

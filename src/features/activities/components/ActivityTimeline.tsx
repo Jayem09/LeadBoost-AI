@@ -107,7 +107,7 @@ export function ActivityTimeline({ leadId }: ActivityTimelineProps) {
       <div className="absolute left-4 top-0 bottom-0 w-px bg-border" />
 
       <div className="space-y-0">
-        {activities.map((activity, index) => {
+        {activities.map((activity) => {
           const config = ACTIVITY_CONFIG[activity.type]
           const Icon = config.icon
 

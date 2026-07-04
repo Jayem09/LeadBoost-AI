@@ -70,7 +70,7 @@ export function ApiKeyManager() {
             <p className="text-sm text-secondary">Loading API keys...</p>
           ) : apiKeys.length > 0 ? (
             <div className="space-y-2">
-              {apiKeys.map((apiKey) => (
+              {apiKeys.map((apiKey: { id: string; name: string; keyPrefix: string; lastUsedAt: Date | null; createdAt: Date }) => (
                 <div
                   key={apiKey.id}
                   className="flex items-center justify-between rounded-md border border-border px-3 py-2"

@@ -3,7 +3,6 @@ import { useNoteStore } from '../store/useNoteStore'
 import { useAuthStore } from '@/features/auth/store/useAuthStore'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { formatDate } from '@/lib/utils'
 import { Send, Trash2 } from 'lucide-react'
 
 interface NotesListProps {
@@ -82,7 +81,7 @@ export function NotesList({ leadId }: NotesListProps) {
               >
                 <div className="flex-1 min-w-0">
                   <p className="text-sm text-primary whitespace-pre-wrap">{note.content}</p>
-                  <p className="text-xs text-secondary mt-1">{formatDate(note.created_at)}</p>
+                  <p className="text-xs text-secondary mt-1">{new Date(note.created_at).toLocaleDateString()}</p>
                 </div>
                 {user && note.created_by === user.id && (
                   <Button
