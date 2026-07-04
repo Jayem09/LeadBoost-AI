@@ -2,7 +2,7 @@ import { TopNav } from '@/components/layout/TopNav'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Zap, ExternalLink, Copy, CheckCircle2 } from 'lucide-react'
+import { Zap, Copy, CheckCircle2 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import {
   getWebhookUrl,
