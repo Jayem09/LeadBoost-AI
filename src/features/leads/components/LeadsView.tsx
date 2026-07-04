@@ -1,17 +1,24 @@
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { TopNav } from '@/components/layout/TopNav'
 import { SearchInput } from '@/components/shared/SearchInput'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { LeadScoreBadge } from '@/components/shared/LeadScoreBadge'
+import { EmptyState } from '@/components/shared/EmptyState'
+import { LeadForm } from './LeadForm'
 import { useLeadStore } from '../store/useLeadStore'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { STATUS_LABELS, INDUSTRIES } from '@/lib/constants'
-import { MoreHorizontal, Plus, Users } from 'lucide-react'
-import { EmptyState } from '@/components/shared/EmptyState'
-import type { LeadStatus } from '@/types'
+import { MoreHorizontal, Plus, Users, Trash2, Edit } from 'lucide-react'
+import type { LeadStatus, Lead } from '@/types'
 
 export function LeadsView() {
-  const { leads, search, setSearch, statusFilter, setStatusFilter } = useLeadStore()
+  const navigate = useNavigate()
+  const { leads, search, setSearch, statusFilter, setStatusFilter, deleteLead } = useLeadStore()
+  const [showForm, setShowForm] = useState(false)
+  const [editingLead, setEditingLead] = useState<Lead | null>(null)
+  const [openMenu, setOpenMenu] = useState<string | null>(null)
 
   const filteredLeads = leads.filter((lead) => {
     const matchesSearch = !search ||
@@ -21,6 +28,19 @@ export function LeadsView() {
     const matchesStatus = statusFilter === 'all' || lead.status === statusFilter
     return matchesSearch && matchesStatus
   })
+
+  const handleEdit = (lead: Lead) => {
+    setEditingLead(lead)
+    setShowForm(true)
+    setOpenMenu(null)
+  }
+
+  const handleDelete = (id: string) => {
+    if (confirm('Delete this lead?')) {
+      deleteLead(id)
+    }
+    setOpenMenu(null)
+  }
 
   return (
     <div>
@@ -47,7 +67,7 @@ export function LeadsView() {
               <option key={ind} value={ind}>{ind}</option>
             ))}
           </select>
-          <Button size="sm">
+          <Button size="sm" onClick={() => { setEditingLead(null); setShowForm(true) }}>
             <Plus className="h-4 w-4 mr-1" /> Add Lead
           </Button>
         </div>
@@ -73,7 +93,8 @@ export function LeadsView() {
                 {filteredLeads.map((lead) => (
                   <tr
                     key={lead.id}
-                    className="border-b border-border hover:bg-card/50 transition-colors"
+                    className="border-b border-border hover:bg-card/50 transition-colors cursor-pointer"
+                    onClick={() => navigate(`/leads/${lead.id}`)}
                   >
                     <td className="py-3 px-4 text-sm font-medium text-primary">{lead.name}</td>
                     <td className="py-3 px-4 text-sm text-secondary">{lead.company}</td>
@@ -82,10 +103,30 @@ export function LeadsView() {
                     <td className="py-3 px-4"><StatusBadge status={lead.status} /></td>
                     <td className="py-3 px-4"><LeadScoreBadge score={lead.leadScore} /></td>
                     <td className="py-3 px-4 text-sm text-secondary">{formatDate(lead.createdAt)}</td>
-                    <td className="py-3 px-4 text-right">
-                      <Button variant="ghost" size="sm">
+                    <td className="py-3 px-4 text-right relative" onClick={(e) => e.stopPropagation()}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => setOpenMenu(openMenu === lead.id ? null : lead.id)}
+                      >
                         <MoreHorizontal className="h-4 w-4" />
                       </Button>
+                      {openMenu === lead.id && (
+                        <div className="absolute right-0 top-full mt-1 w-36 rounded-md border border-border bg-card shadow-lg z-10">
+                          <button
+                            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-primary hover:bg-background"
+                            onClick={() => handleEdit(lead)}
+                          >
+                            <Edit className="h-3.5 w-3.5" /> Edit
+                          </button>
+                          <button
+                            className="flex w-full items-center gap-2 px-3 py-2 text-sm text-danger hover:bg-background"
+                            onClick={() => handleDelete(lead.id)}
+                          >
+                            <Trash2 className="h-3.5 w-3.5" /> Delete
+                          </button>
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}
@@ -94,6 +135,12 @@ export function LeadsView() {
           </div>
         )}
       </div>
+
+      <LeadForm
+        open={showForm}
+        onClose={() => { setShowForm(false); setEditingLead(null) }}
+        lead={editingLead}
+      />
     </div>
   )
 }
