@@ -1,0 +1,19 @@
+{
+  "name": "LeadBoost AI",
+  "short_name": "LeadBoost",
+  "description": "Never lose a lead again. Capture, qualify, and convert leads faster with intelligent automation.",
+  "theme_color": "#6366f1",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,27 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TopNav } from '@/components/layout/TopNav'
-import { SearchInput } from '@/components/shared/SearchInput'
 import { Button } from '@/components/ui/button'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { LeadScoreBadge } from '@/components/shared/LeadScoreBadge'
 import { EmptyState } from '@/components/shared/EmptyState'
 import { LeadForm } from './LeadForm'
+import { BulkActionBar } from './BulkActionBar'
+import { AdvancedSearch } from './AdvancedSearch'
 import { useLeadStore } from '../store/useLeadStore'
+import { useBulkSelectionStore } from '../store/useBulkSelectionStore'
+import { useSearchStore } from '../store/useSearchStore'
 import { useAuth } from '@/features/auth/hooks/useAuth'
 import { leadService } from '../services/leadService'
 import { formatCurrency, formatDate } from '@/lib/utils'
-import { STATUS_LABELS, INDUSTRIES } from '@/lib/constants'
 import { MoreHorizontal, Plus, Users, Trash2, Edit } from 'lucide-react'
-import type { LeadStatus, Lead } from '@/types'
+import type { Lead } from '@/types'
 
 export function LeadsView() {
   const navigate = useNavigate()
   const { user } = useAuth()
-  const { leads, search, setSearch, statusFilter, setStatusFilter, removeLead, fetchLeads, setLeads } = useLeadStore()
+  const { leads, removeLead, fetchLeads, setLeads } = useLeadStore()
+  const { selectedIds, toggleSelect, selectAll } = useBulkSelectionStore()
+  const { query, filters, sortBy, sortDirection } = useSearchStore()
   const [showForm, setShowForm] = useState(false)
   const [editingLead, setEditingLead] = useState<Lead | null>(null)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
+  const [showImportModal, setShowImportModal] = useState(false)
 
   useEffect(() => {
     if (!user) return
@@ -35,14 +40,78 @@ export function LeadsView() {
     return () => unsubscribe()
   }, [user, fetchLeads, setLeads])
 
-  const filteredLeads = leads.filter((lead) => {
-    const matchesSearch = !search ||
-      lead.name.toLowerCase().includes(search.toLowerCase()) ||
-      lead.company.toLowerCase().includes(search.toLowerCase()) ||
-      lead.email.toLowerCase().includes(search.toLowerCase())
-    const matchesStatus = statusFilter === 'all' || lead.status === statusFilter
-    return matchesSearch && matchesStatus
-  })
+  // Client-side filtering + sorting using the search store state
+  const filteredLeads = useMemo(() => {
+    let result = leads.filter((lead) => {
+      // Full-text search across name, email, company
+      const matchesQuery =
+        !query ||
+        lead.name.toLowerCase().includes(query.toLowerCase()) ||
+        lead.email.toLowerCase().includes(query.toLowerCase()) ||
+        lead.company.toLowerCase().includes(query.toLowerCase())
+
+      // Status filter
+      const matchesStatus =
+        filters.status === 'all' || lead.status === filters.status
+
+      // Industry filter
+      const matchesIndustry =
+        !filters.industry || lead.industry === filters.industry
+
+      // Source filter
+      const matchesSource =
+        !filters.source || lead.source === filters.source
+
+      // Date range filter
+      const leadDate = new Date(lead.createdAt)
+      const matchesDateFrom =
+        !filters.dateFrom || leadDate >= new Date(filters.dateFrom)
+      const matchesDateTo =
+        !filters.dateTo || leadDate <= new Date(filters.dateTo + 'T23:59:59')
+
+      // Score range filter
+      const matchesScoreMin =
+        !filters.scoreMin || lead.leadScore >= Number(filters.scoreMin)
+      const matchesScoreMax =
+        !filters.scoreMax || lead.leadScore <= Number(filters.scoreMax)
+
+      return (
+        matchesQuery &&
+        matchesStatus &&
+        matchesIndustry &&
+        matchesSource &&
+        matchesDateFrom &&
+        matchesDateTo &&
+        matchesScoreMin &&
+        matchesScoreMax
+      )
+    })
+
+    // Sort results
+    result.sort((a, b) => {
+      let comparison = 0
+
+      switch (sortBy) {
+        case 'name':
+          comparison = a.name.localeCompare(b.name)
+          break
+        case 'leadScore':
+          comparison = a.leadScore - b.leadScore
+          break
+        case 'createdAt':
+        default:
+          comparison = new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          break
+      }
+
+      return sortDirection === 'desc' ? -comparison : comparison
+    })
+
+    return result
+  }, [leads, query, filters, sortBy, sortDirection])
+
+  const filteredIds = filteredLeads.map((l) => l.id)
+  const allSelected = filteredIds.length > 0 && filteredIds.every((id) => selectedIds.has(id))
 
   const handleEdit = (lead: Lead) => {
     setEditingLead(lead)
@@ -62,38 +131,33 @@ export function LeadsView() {
       <TopNav title="Leads" subtitle="Manage and track all your leads" />
 
       <div className="p-6 space-y-4">
+        {/* Advanced search + filter bar */}
+        <AdvancedSearch />
+
         <div className="flex items-center gap-4">
-          <div className="flex-1 max-w-sm">
-            <SearchInput placeholder="Search leads..." onSearch={setSearch} />
-          </div>
-          <select
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value as LeadStatus | 'all')}
-            className="h-10 rounded-md border border-border bg-background px-3 text-sm text-primary"
-          >
-            <option value="all">All Status</option>
-            {(Object.keys(STATUS_LABELS) as LeadStatus[]).map((s) => (
-              <option key={s} value={s}>{STATUS_LABELS[s]}</option>
-            ))}
-          </select>
-          <select className="h-10 rounded-md border border-border bg-background px-3 text-sm text-primary">
-            <option value="">All Industries</option>
-            {INDUSTRIES.map((ind) => (
-              <option key={ind} value={ind}>{ind}</option>
-            ))}
-          </select>
+          <Button variant="secondary" size="sm" onClick={() => setShowImportModal(true)}>
+            Import CSV
+          </Button>
           <Button size="sm" onClick={() => { setEditingLead(null); setShowForm(true) }}>
             <Plus className="h-4 w-4 mr-1" /> Add Lead
           </Button>
         </div>
 
         {filteredLeads.length === 0 ? (
-          <EmptyState icon={Users} title="No leads found" description="Add your first lead to get started" />
+          <EmptyState icon={Users} title="No leads found" description="Adjust your filters or add a new lead" />
         ) : (
           <div className="border border-border rounded-lg overflow-hidden">
             <table className="w-full">
               <thead>
                 <tr className="bg-card border-b border-border">
+                  <th className="text-left py-3 px-4 text-xs font-medium text-secondary w-10">
+                    <input
+                      type="checkbox"
+                      checked={allSelected}
+                      onChange={() => selectAll(filteredIds)}
+                      className="h-4 w-4 rounded border-border accent-accent cursor-pointer"
+                    />
+                  </th>
                   <th className="text-left py-3 px-4 text-xs font-medium text-secondary">Name</th>
                   <th className="text-left py-3 px-4 text-xs font-medium text-secondary">Company</th>
                   <th className="text-left py-3 px-4 text-xs font-medium text-secondary">Email</th>
@@ -111,6 +175,14 @@ export function LeadsView() {
                     className="border-b border-border hover:bg-card/50 transition-colors cursor-pointer"
                     onClick={() => navigate(`/leads/${lead.id}`)}
                   >
+                    <td className="py-3 px-4" onClick={(e) => e.stopPropagation()}>
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.has(lead.id)}
+                        onChange={() => toggleSelect(lead.id)}
+                        className="h-4 w-4 rounded border-border accent-accent cursor-pointer"
+                      />
+                    </td>
                     <td className="py-3 px-4 text-sm font-medium text-primary">{lead.name}</td>
                     <td className="py-3 px-4 text-sm text-secondary">{lead.company}</td>
                     <td className="py-3 px-4 text-sm text-secondary">{lead.email}</td>
@@ -156,6 +228,17 @@ export function LeadsView() {
         onClose={() => { setShowForm(false); setEditingLead(null) }}
         lead={editingLead}
       />
+
+      <CsvImportModal
+        open={showImportModal}
+        onClose={() => setShowImportModal(false)}
+        onImportComplete={() => {
+          if (user) fetchLeads(user.id)
+          setShowImportModal(false)
+        }}
+      />
+
+      <BulkActionBar />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import type { LeadStatus } from '@/types'
+import type { LeadStatus, TaskStatus } from '@/types'
 
 export const STATUS_COLORS: Record<LeadStatus, string> = {
   new: '#3B82F6',
@@ -34,3 +34,20 @@ export const INDUSTRIES = [
   'Technology', 'Healthcare', 'Real Estate', 'Finance', 'Education',
   'Manufacturing', 'Retail', 'Marketing', 'Consulting', 'Other',
 ]
+
+export const LEAD_SOURCES = [
+  'Website', 'Referral', 'Cold Call', 'LinkedIn', 'Email Campaign',
+  'Trade Show', 'Social Media', 'Partner', 'Inbound', 'Other',
+]
+
+export const TASK_STATUS_LABELS: Record<TaskStatus, string> = {
+  pending: 'Pending',
+  in_progress: 'In Progress',
+  completed: 'Completed',
+}
+
+export const TASK_STATUS_COLORS: Record<TaskStatus, string> = {
+  pending: 'warning',
+  in_progress: 'default',
+  completed: 'success',
+}

@@ -5,7 +5,10 @@ import {
   GitBranch,
   BarChart3,
   Zap,
+  Mail,
+  Link,
   Settings,
+  CheckSquare,
   ChevronLeft,
   ChevronRight,
   Menu,
@@ -13,22 +16,27 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState, useEffect } from 'react'
+import { useRoleStore } from '@/features/auth/store/useRoleStore'
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/leads', icon: Users, label: 'Leads' },
   { to: '/pipeline', icon: GitBranch, label: 'Pipeline' },
-  { to: '/analytics', icon: BarChart3, label: 'Analytics' },
-  { to: '/automation', icon: Zap, label: 'Automation' },
+  { to: '/tasks', icon: CheckSquare, label: 'Tasks' },
+  { to: '/analytics', icon: BarChart3, label: 'Analytics', permission: 'view_analytics' as const },
+  { to: '/automation', icon: Zap, label: 'Automation', permission: 'manage_automation' as const },
+  { to: '/integrations', icon: Link, label: 'Integrations' },
+  { to: '/email-sequences', icon: Mail, label: 'Sequences' },
 ]
 
 const bottomItems = [
-  { to: '/settings', icon: Settings, label: 'Settings' },
+  { to: '/settings', icon: Settings, label: 'Settings', permission: 'manage_settings' as const },
 ]
 
 export function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { hasPermission, loading } = useRoleStore()
 
   // Close mobile sidebar on route change
   useEffect(() => {
@@ -61,7 +69,9 @@ export function Sidebar() {
       </div>
 
       <nav className="flex-1 space-y-1 p-2">
-        {navItems.map((item) => (
+        {navItems
+          .filter((item) => !item.permission || loading || hasPermission(item.permission))
+          .map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
@@ -84,7 +94,9 @@ export function Sidebar() {
       </nav>
 
       <div className="space-y-1 p-2 border-t border-border">
-        {bottomItems.map((item) => (
+        {bottomItems
+          .filter((item) => !item.permission || loading || hasPermission(item.permission))
+          .map((item) => (
           <NavLink
             key={item.to}
             to={item.to}

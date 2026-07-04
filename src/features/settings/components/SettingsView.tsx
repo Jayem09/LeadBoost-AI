@@ -3,6 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Save } from 'lucide-react'
+import { CustomFieldManager } from '@/features/custom-fields/components/CustomFieldManager'
+import { ApiKeyManager } from '@/features/api-keys/components/ApiKeyManager'
+import { RoleGuard } from '@/features/auth/components/RoleGuard'
 
 export function SettingsView() {
   return (
@@ -87,6 +90,12 @@ export function SettingsView() {
                 </div>
               </CardContent>
             </Card>
+
+            <CustomFieldManager />
+
+            <RoleGuard permission="manage_settings">
+              <ApiKeyManager />
+            </RoleGuard>
 
             <div className="flex justify-end gap-3">
               <Button variant="secondary">Cancel</Button>

@@ -1,5 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useLeadStore } from '../store/useLeadStore'
+import { useCustomFieldStore } from '@/features/custom-fields/store/useCustomFieldStore'
+import { CustomFieldForm } from '@/features/custom-fields/components/CustomFieldForm'
 import { TopNav } from '@/components/layout/TopNav'
 import { StatusBadge } from '@/components/shared/StatusBadge'
 import { LeadScoreBadge } from '@/components/shared/LeadScoreBadge'
@@ -7,15 +9,23 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { STATUS_LABELS } from '@/lib/constants'
-import { ArrowLeft, Mail, Phone, Building2, Calendar, DollarSign, Tag, Edit, Trash2 } from 'lucide-react'
-import { useState } from 'react'
+import { ArrowLeft, Mail, Phone, Building2, Calendar, DollarSign, Tag, Edit, Trash2, Settings2 } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import { LeadForm } from './LeadForm'
+import { TagManager } from '@/features/tags/components/TagManager'
+import { ActivityTimeline } from '@/features/activities/components/ActivityTimeline'
+import { NotesList } from '@/features/notes/components/NotesList'
 
 export function LeadDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const { leads, removeLead } = useLeadStore()
+  const { fields, fetchFields } = useCustomFieldStore()
   const [editing, setEditing] = useState(false)
+
+  useEffect(() => {
+    fetchFields()
+  }, [fetchFields])
 
   const lead = leads.find((l) => l.id === id)
 
@@ -138,55 +148,39 @@ export function LeadDetail() {
               </CardContent>
             </Card>
 
-            {lead.tags.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Tags</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <TagManager leadId={lead.id} />
+              </CardContent>
+            </Card>
+
+            {fields.length > 0 && (
               <Card>
                 <CardHeader>
-                  <CardTitle>Tags</CardTitle>
+                  <CardTitle className="flex items-center gap-2">
+                    <Settings2 className="h-4 w-4" />
+                    Custom Fields
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {lead.tags.map((tag) => (
-                      <span key={tag} className="inline-flex items-center rounded-md bg-accent/10 px-2.5 py-0.5 text-xs font-medium text-accent">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  <CustomFieldForm leadId={lead.id} fields={fields} />
                 </CardContent>
               </Card>
             )}
           </div>
 
           <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Notes</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-secondary whitespace-pre-wrap">
-                  {lead.notes || 'No notes yet.'}
-                </p>
-              </CardContent>
-            </Card>
+            <NotesList leadId={lead.id} />
 
             <Card>
               <CardHeader>
-                <CardTitle>Activity</CardTitle>
+                <CardTitle>Activity Timeline</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-success shrink-0" />
-                  <div>
-                    <p className="text-sm text-primary">Lead created</p>
-                    <p className="text-xs text-secondary">{formatDate(lead.createdAt)}</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-accent shrink-0" />
-                  <div>
-                    <p className="text-sm text-primary">Last updated</p>
-                    <p className="text-xs text-secondary">{formatDate(lead.updatedAt)}</p>
-                  </div>
-                </div>
+              <CardContent>
+                <ActivityTimeline leadId={lead.id} />
               </CardContent>
             </Card>
           </div>

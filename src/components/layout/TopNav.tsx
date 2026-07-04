@@ -1,7 +1,8 @@
-import { Moon, Sun, Bell } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from '@/hooks/useTheme'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { NotificationBell } from '@/features/notifications/components/NotificationBell'
 
 interface TopNavProps {
   title: string
@@ -22,9 +23,7 @@ export function TopNav({ title, subtitle }: TopNavProps) {
         <Button variant="ghost" size="sm" onClick={toggleTheme}>
           {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
         </Button>
-        <Button variant="ghost" size="sm">
-          <Bell className="h-4 w-4" />
-        </Button>
+        <NotificationBell />
         <Avatar>
           <AvatarFallback>JD</AvatarFallback>
         </Avatar>
