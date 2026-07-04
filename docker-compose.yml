@@ -12,6 +12,7 @@ services:
       - GENERIC_TIMEZONE=Asia/Manila
       - TZ=Asia/Manila
       - N8N_SECURE_COOKIE=false
+      - WEBHOOK_URL=http://localhost:5678/
     volumes:
       - n8n_data:/home/node/.n8n
     networks:

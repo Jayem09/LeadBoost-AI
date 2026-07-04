@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Following up</title>
+  <style>
+    body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
+    .container { max-width: 600px; margin: 0 auto; padding: 40px 20px; }
+    .header { text-align: center; margin-bottom: 32px; }
+    .logo { font-size: 24px; font-weight: 700; color: #6366f1; }
+    .card { background: #ffffff; border-radius: 8px; border: 1px solid #e5e7eb; padding: 32px; }
+    .title { font-size: 20px; font-weight: 600; color: #111827; margin: 0 0 8px; }
+    .text { font-size: 14px; color: #6b7280; line-height: 1.6; margin: 0 0 16px; }
+    .btn { display: inline-block; background: #6366f1; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; margin: 16px 0; }
+    .footer { text-align: center; margin-top: 32px; font-size: 12px; color: #9ca3af; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">LeadBoost AI</div>
+    </div>
+    <div class="card">
+      <h1 class="title">Following up, {{leadName}}!</h1>
+      <p class="text">
+        {{leadName}} from {{leadCompany}} showed interest {{daysAgo}} days ago.
+      </p>
+      <p class="text">
+        Would you like to schedule a quick call to discuss how we can help?
+      </p>
+      <a href="{{dashboardUrl}}" class="btn">View Lead Details</a>
+      <p class="text">
+        You can also reply to this email to get in touch directly.
+      </p>
+    </div>
+    <div class="footer">
+      <p>LeadBoost AI &copy; 2026</p>
+    </div>
+  </div>
+</body>
+</html>

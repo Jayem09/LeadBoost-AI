@@ -2,7 +2,7 @@ import { TopNav } from '@/components/layout/TopNav'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Zap, Copy, CheckCircle2 } from 'lucide-react'
+import { Zap, Copy, CheckCircle2, AlertCircle, Wifi, WifiOff } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import {
   getWebhookUrl,
@@ -19,7 +19,9 @@ export function AutomationView() {
   const [events, setEvents] = useState<string[]>([])
   const [log, setLog] = useState<WebhookLog[]>([])
   const [copied, setCopied] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [testing, setTesting] = useState(false)
+  const [testResult, setTestResult] = useState<'success' | 'failed' | null>(null)
 
   useEffect(() => {
     setUrl(getWebhookUrl())
@@ -29,6 +31,8 @@ export function AutomationView() {
 
   const handleSaveUrl = () => {
     setWebhookUrl(url)
+    setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
   }
 
   const handleToggleEvent = (event: string) => {
@@ -45,13 +49,15 @@ export function AutomationView() {
 
   const handleTest = async () => {
     setTesting(true)
-    await automationService.sendLeadWebhook('lead.created', {
+    setTestResult(null)
+    const success = await automationService.sendLeadWebhook('lead.created', {
       name: 'Test Lead',
       email: 'test@example.com',
       company: 'Test Co',
       source: 'Test',
     })
     setLog(getWebhookLog())
+    setTestResult(success ? 'success' : 'failed')
     setTesting(false)
   }
 
@@ -60,6 +66,19 @@ export function AutomationView() {
       <TopNav title="Automation" subtitle="Connect with n8n and automate your workflows" />
 
       <div className="p-6 space-y-6 max-w-3xl">
+        {/* Connection Status */}
+        {url ? (
+          <div className="flex items-center gap-2 p-3 rounded-md bg-success/10 border border-success/20 text-success text-sm">
+            <Wifi className="h-4 w-4" />
+            Webhook configured — {url.length > 60 ? url.slice(0, 60) + '...' : url}
+          </div>
+        ) : (
+          <div className="flex items-center gap-2 p-3 rounded-md bg-warning/10 border border-warning/20 text-warning text-sm">
+            <WifiOff className="h-4 w-4" />
+            No webhook URL configured. Add one below to start receiving events.
+          </div>
+        )}
+
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -80,8 +99,9 @@ export function AutomationView() {
                 <Button variant="secondary" size="sm" onClick={handleCopy} disabled={!url}>
                   {copied ? <CheckCircle2 className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 </Button>
-                <Button variant="secondary" size="sm" onClick={handleSaveUrl}>
-                  Save
+                <Button size="sm" onClick={handleSaveUrl}>
+                  {saved ? <CheckCircle2 className="h-4 w-4 mr-1" /> : null}
+                  {saved ? 'Saved!' : 'Save'}
                 </Button>
               </div>
             </div>
@@ -103,9 +123,22 @@ export function AutomationView() {
               </div>
             </div>
 
-            <Button size="sm" onClick={handleTest} disabled={!url || testing}>
-              <Zap className="h-4 w-4 mr-2" /> {testing ? 'Sending...' : 'Test Webhook'}
-            </Button>
+            <div className="flex items-center gap-3">
+              <Button size="sm" onClick={handleTest} disabled={!url || testing}>
+                <Zap className="h-4 w-4 mr-2" /> {testing ? 'Sending...' : 'Test Webhook'}
+              </Button>
+
+              {testResult === 'success' && (
+                <span className="flex items-center gap-1 text-sm text-success">
+                  <CheckCircle2 className="h-4 w-4" /> Webhook is working!
+                </span>
+              )}
+              {testResult === 'failed' && (
+                <span className="flex items-center gap-1 text-sm text-danger">
+                  <AlertCircle className="h-4 w-4" /> Failed — check URL and n8n workflow is active
+                </span>
+              )}
+            </div>
           </CardContent>
         </Card>
 

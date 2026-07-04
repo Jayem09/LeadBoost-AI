@@ -68,8 +68,14 @@ export function LandingPage() {
       {/* Nav */}
       <nav className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
-          <span className="text-sm font-semibold text-primary">LeadBoost AI</span>
+          <Link to="/" className="text-sm font-semibold text-primary">LeadBoost AI</Link>
           <div className="flex items-center gap-3">
+            <Link to="/pricing">
+              <Button variant="ghost" size="sm">Pricing</Button>
+            </Link>
+            <Link to="/about">
+              <Button variant="ghost" size="sm">About</Button>
+            </Link>
             <Link to="/login">
               <Button variant="ghost" size="sm">Sign in</Button>
             </Link>
@@ -229,7 +235,11 @@ export function LandingPage() {
       <footer className="border-t border-border">
         <div className="max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
           <span className="text-xs text-muted">LeadBoost AI</span>
-          <span className="text-xs text-muted">&copy; {new Date().getFullYear()}</span>
+          <div className="flex items-center gap-4">
+            <Link to="/pricing" className="text-xs text-muted hover:text-primary">Pricing</Link>
+            <Link to="/about" className="text-xs text-muted hover:text-primary">About</Link>
+            <span className="text-xs text-muted">&copy; {new Date().getFullYear()}</span>
+          </div>
         </div>
       </footer>
     </div>
