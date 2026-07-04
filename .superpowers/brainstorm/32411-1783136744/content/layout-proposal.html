@@ -1,0 +1,116 @@
+<h2>LeadBoost AI — Proposed Layout Structure</h2>
+<p class="subtitle">Desktop layout with collapsible sidebar + top navigation</p>
+
+<div class="section">
+  <h3>Main Application Shell</h3>
+  <div style="border:1px solid #27272a; border-radius:12px; overflow:hidden; background:#09090b; max-width:900px; margin:0 auto;">
+    <!-- Sidebar -->
+    <div style="display:flex; min-height:400px;">
+      <div style="width:220px; background:#18181b; border-right:1px solid #27272a; padding:20px 12px; display:flex; flex-direction:column; gap:4px;">
+        <div style="padding:8px 12px; margin-bottom:16px; font-weight:600; font-size:14px; color:#fafafa;">LeadBoost AI</div>
+        <div style="padding:8px 12px; border-radius:6px; background:#2563eb20; color:#60a5fa; font-size:13px;">Dashboard</div>
+        <div style="padding:8px 12px; border-radius:6px; color:#a1a1aa; font-size:13px;">Leads</div>
+        <div style="padding:8px 12px; border-radius:6px; color:#a1a1aa; font-size:13px;">Pipeline</div>
+        <div style="padding:8px 12px; border-radius:6px; color:#a1a1aa; font-size:13px;">Analytics</div>
+        <div style="padding:8px 12px; border-radius:6px; color:#a1a1aa; font-size:13px;">Automation</div>
+        <div style="margin-top:auto; padding-top:16px; border-top:1px solid #27272a;">
+          <div style="padding:8px 12px; border-radius:6px; color:#a1a1aa; font-size:13px;">Settings</div>
+        </div>
+      </div>
+      <!-- Main Content Area -->
+      <div style="flex:1; padding:24px; background:#09090b;">
+        <!-- Top Bar -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+          <div>
+            <div style="font-size:20px; font-weight:600; color:#fafafa;">Dashboard</div>
+            <div style="font-size:12px; color:#a1a1aa;">Welcome back, here's your overview</div>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <div style="width:32px; height:32px; border-radius:8px; background:#27272a;"></div>
+            <div style="width:32px; height:32px; border-radius:999px; background:#2563eb; display:flex; align-items:center; justify-content:center; color:white; font-size:12px; font-weight:600;">JD</div>
+          </div>
+        </div>
+        <!-- Stat Cards Row -->
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px;">
+          <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+            <div style="font-size:12px; color:#a1a1aa; margin-bottom:4px;">Total Leads</div>
+            <div style="font-size:24px; font-weight:600; color:#fafafa;">1,284</div>
+            <div style="font-size:11px; color:#22c55e; margin-top:4px;">+12.5% this month</div>
+          </div>
+          <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+            <div style="font-size:12px; color:#a1a1aa; margin-bottom:4px;">Hot Leads</div>
+            <div style="font-size:24px; font-weight:600; color:#fafafa;">48</div>
+            <div style="font-size:11px; color:#f59e0b; margin-top:4px;">Needs attention</div>
+          </div>
+          <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+            <div style="font-size:12px; color:#a1a1aa; margin-bottom:4px;">Conversion Rate</div>
+            <div style="font-size:24px; font-weight:600; color:#fafafa;">24.8%</div>
+            <div style="font-size:11px; color:#22c55e; margin-top:4px;">+3.2%</div>
+          </div>
+          <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+            <div style="font-size:12px; color:#a1a1aa; margin-bottom:4px;">Revenue</div>
+            <div style="font-size:24px; font-weight:600; color:#fafafa;">$84,250</div>
+            <div style="font-size:11px; color:#22c55e; margin-top:4px;">+18.7%</div>
+          </div>
+        </div>
+        <!-- Content Split -->
+        <div style="display:grid; grid-template-columns:2fr 1fr; gap:16px;">
+          <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:20px; min-height:200px;">
+            <div style="font-size:14px; font-weight:500; color:#fafafa; margin-bottom:16px;">Leads Overview</div>
+            <div style="display:flex; gap:8px; align-items:flex-end; height:120px; padding-top:20px;">
+              <div style="flex:1; background:#2563eb; border-radius:4px 4px 0 0; height:60px;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:4px 4px 0 0; height:90px;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:4px 4px 0 0; height:45px;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:4px 4px 0 0; height:110px;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:4px 4px 0 0; height:75px;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:4px 4px 0 0; height:95px;"></div>
+            </div>
+          </div>
+          <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:20px; min-height:200px;">
+            <div style="font-size:14px; font-weight:500; color:#fafafa; margin-bottom:16px;">Recent Activity</div>
+            <div style="display:flex; flex-direction:column; gap:12px;">
+              <div style="display:flex; gap:8px; align-items:center;">
+                <div style="width:6px; height:6px; border-radius:999px; background:#22c55e;"></div>
+                <div style="font-size:12px; color:#a1a1aa;">New lead: Acme Corp</div>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <div style="width:6px; height:6px; border-radius:999px; background:#2563eb;"></div>
+                <div style="font-size:12px; color:#a1a1aa;">Deal won: TechStart</div>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <div style="width:6px; height:6px; border-radius:999px; background:#f59e0b;"></div>
+                <div style="font-size:12px; color:#a1a1aa;">Meeting scheduled</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>Key Design Decisions</h3>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+      <div style="font-size:13px; font-weight:500; color:#fafafa; margin-bottom:4px;">Collapsible Sidebar</div>
+      <div style="font-size:12px; color:#a1a1aa;">220px default, collapses to icon-only. Gives the main content area maximum space for tables and kanban.</div>
+    </div>
+    <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+      <div style="font-size:13px; font-weight:500; color:#fafafa; margin-bottom:4px;">Dark-First Design</div>
+      <div style="font-size:12px; color:#a1a1aa;">Dark backgrounds (#09090B), subtle borders (#27272A). Light mode is equally polished. Both get equal love.</div>
+    </div>
+    <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+      <div style="font-size:13px; font-weight:500; color:#fafafa; margin-bottom:4px;">4-Column Stat Grid</div>
+      <div style="font-size:12px; color:#a1a1aa;">Top-level KPIs always visible. Each card shows value + trend indicator. Responsive → 2-col on tablet, 1-col on mobile.</div>
+    </div>
+    <div style="background:#18181b; border:1px solid #27272a; border-radius:12px; padding:16px;">
+      <div style="font-size:13px; font-weight:500; color:#fafafa; margin-bottom:4px;">Content Hierarchy</div>
+      <div style="font-size:12px; color:#a1a1aa;">2:1 split for main content vs secondary (activity feed). Clean, predictable rhythm. No floating cards.</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="subtitle" style="text-align:center;">Open http://localhost:64274 in your browser to see the full mockup. Let me know if this layout direction works for you.</p>
+</div>
