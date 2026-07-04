@@ -51,8 +51,7 @@ export function Sidebar() {
       <div className="flex h-14 items-center justify-between px-4 border-b border-border">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <img src="/logo.svg" alt="LeadBoost AI" className="h-6 w-6" />
-            <span className="text-sm font-semibold text-primary">LeadBoost AI</span>
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-8 w-auto" />
           </div>
         )}
         <button

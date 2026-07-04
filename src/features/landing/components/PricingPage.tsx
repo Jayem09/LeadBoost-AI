@@ -90,8 +90,7 @@ export function PricingPage() {
       <nav className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/logo.svg" alt="LeadBoost AI" className="h-6 w-6" />
-            <span className="text-sm font-semibold text-primary">LeadBoost AI</span>
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-8 w-auto" />
           </Link>
           <div className="flex items-center gap-3">
             <Link to="/login">
