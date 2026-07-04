@@ -51,7 +51,7 @@ export function Sidebar() {
       <div className="flex h-14 items-center justify-between px-4 border-b border-border">
         {!collapsed && (
           <div className="flex items-center gap-2">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-8 w-auto" />
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-10 w-auto mix-blend-multiply dark:mix-blend-screen" />
           </div>
         )}
         <button

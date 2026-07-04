@@ -77,7 +77,7 @@ export function LandingPage() {
       <nav className="border-b border-border sticky top-0 z-50 bg-background/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-10 w-auto" />
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-12 w-auto mix-blend-multiply dark:mix-blend-screen" />
           </Link>
           <div className="flex items-center gap-4">
             <Link to="/pricing"><Button variant="ghost" size="sm">Pricing</Button></Link>
@@ -394,7 +394,7 @@ export function LandingPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <img src="/Logo.png" alt="LeadBoost AI" className="h-8 w-auto" />
+                <img src="/Logo.png" alt="LeadBoost AI" className="h-10 w-auto mix-blend-multiply dark:mix-blend-screen" />
               </div>
               <p className="text-xs text-secondary leading-relaxed">Capture, qualify, and convert leads faster with intelligent automation.</p>
             </div>

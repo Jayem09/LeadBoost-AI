@@ -34,7 +34,7 @@ export function AboutPage() {
       <nav className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-8 w-auto" />
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-10 w-auto mix-blend-multiply dark:mix-blend-screen" />
           </Link>
           <div className="flex items-center gap-3">
             <Link to="/login">
