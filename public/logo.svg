@@ -1,5 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
-  <rect width="40" height="40" rx="10" fill="#6366f1"/>
-  <path d="M12 28V14l9 7-9 7z" fill="white" opacity="0.95"/>
-  <path d="M21 28V14l9 7-9 7z" fill="white" opacity="0.55"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" fill="none">
+  <!-- Growth Icon -->
+  <rect x="10" y="55" width="12" height="25" rx="6" fill="#6366f1" />
+  <rect x="30" y="35" width="12" height="45" rx="6" fill="#6366f1" />
+  <rect x="50" y="15" width="12" height="65" rx="6" fill="#6366f1" />
+  
+  <!-- Text -->
+  <text x="85" y="65" font-family="Inter, sans-serif" font-weight="700" font-size="36" fill="#1e293b">LeadBoost</text>
+  <text x="290" y="65" font-family="Inter, sans-serif" font-weight="500" font-size="36" fill="#6366f1">AI</text>
 </svg>
