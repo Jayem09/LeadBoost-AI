@@ -1,9 +1,10 @@
-import { Suspense, useState } from 'react'
+import { Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { ThemeProvider } from './providers'
 import { AppShell } from '@/components/layout/AppShell'
 import { publicRoutes, protectedRoutes } from './routes'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 
 const fallback = (
   <div className="p-6 space-y-4">
@@ -18,9 +19,21 @@ const fallback = (
   </div>
 )
 
-function App() {
-  const [isAuthenticated] = useState(true) // Will be replaced with Firebase auth
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated, loading } = useAuth()
 
+  if (loading) {
+    return fallback
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />
+  }
+
+  return <AppShell>{children}</AppShell>
+}
+
+function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
@@ -37,11 +50,7 @@ function App() {
                 key={route.path}
                 path={route.path}
                 element={
-                  isAuthenticated ? (
-                    <AppShell>{route.element}</AppShell>
-                  ) : (
-                    <Navigate to="/login" replace />
-                  )
+                  <ProtectedRoute>{route.element}</ProtectedRoute>
                 }
               />
             ))}

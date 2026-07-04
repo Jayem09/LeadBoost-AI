@@ -1,18 +1,26 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Eye, EyeOff } from 'lucide-react'
+import { useAuthStore } from '../store/useAuthStore'
 
 export function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const { register, loginWithGoogle, loginWithGitHub, error, clearError } = useAuthStore()
+  const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Register:', { name, email, password })
+    try {
+      await register(email, password, name)
+      navigate('/')
+    } catch {
+      // Error handled by store
+    }
   }
 
   return (
@@ -35,6 +43,13 @@ export function RegisterForm() {
           <h2 className="text-2xl font-semibold text-primary mb-2">Create your account</h2>
           <p className="text-sm text-secondary mb-8">Start your 14-day free trial</p>
 
+          {error && (
+            <div className="mb-4 p-3 rounded-md bg-danger/10 border border-danger/20 text-danger text-sm">
+              {error}
+              <button onClick={clearError} className="ml-2 underline">Dismiss</button>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="text-sm text-secondary mb-1.5 block">Full Name</label>
@@ -43,6 +58,7 @@ export function RegisterForm() {
                 placeholder="John Doe"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                required
               />
             </div>
 
@@ -53,6 +69,7 @@ export function RegisterForm() {
                 placeholder="you@company.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
 
@@ -64,6 +81,8 @@ export function RegisterForm() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  required
+                  minLength={6}
                 />
                 <button
                   type="button"
@@ -90,10 +109,10 @@ export function RegisterForm() {
           </div>
 
           <div className="grid grid-cols-2 gap-3">
-            <Button variant="secondary" className="w-full">
+            <Button variant="secondary" className="w-full" onClick={loginWithGoogle}>
               Continue with Google
             </Button>
-            <Button variant="secondary" className="w-full">
+            <Button variant="secondary" className="w-full" onClick={loginWithGitHub}>
               Continue with GitHub
             </Button>
           </div>

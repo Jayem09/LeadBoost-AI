@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { ArrowLeft, Mail } from 'lucide-react'
+import { useAuthStore } from '../store/useAuthStore'
 
 export function ForgotPasswordForm() {
   const [email, setEmail] = useState('')
   const [sent, setSent] = useState(false)
+  const [error, setError] = useState('')
+  const { resetPassword } = useAuthStore()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setSent(true)
+    try {
+      await resetPassword(email)
+      setSent(true)
+    } catch (err: any) {
+      setError(err.message)
+    }
   }
 
   return (
@@ -27,6 +35,12 @@ export function ForgotPasswordForm() {
               Enter your email address and we'll send you a link to reset your password.
             </p>
 
+            {error && (
+              <div className="mb-4 p-3 rounded-md bg-danger/10 border border-danger/20 text-danger text-sm">
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="text-sm text-secondary mb-1.5 block">Email</label>
@@ -35,6 +49,7 @@ export function ForgotPasswordForm() {
                   placeholder="you@company.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
 
