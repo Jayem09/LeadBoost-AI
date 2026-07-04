@@ -14,7 +14,7 @@ import { LeadForm } from './LeadForm'
 export function LeadDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { leads, deleteLead } = useLeadStore()
+  const { leads, removeLead } = useLeadStore()
   const [editing, setEditing] = useState(false)
 
   const lead = leads.find((l) => l.id === id)
@@ -33,9 +33,9 @@ export function LeadDetail() {
     )
   }
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (confirm('Are you sure you want to delete this lead?')) {
-      deleteLead(lead.id)
+      await removeLead(lead.id)
       navigate('/leads')
     }
   }

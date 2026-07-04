@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { TopNav } from '@/components/layout/TopNav'
 import { SearchInput } from '@/components/shared/SearchInput'
@@ -8,6 +8,8 @@ import { LeadScoreBadge } from '@/components/shared/LeadScoreBadge'
 import { EmptyState } from '@/components/shared/EmptyState'
 import { LeadForm } from './LeadForm'
 import { useLeadStore } from '../store/useLeadStore'
+import { useAuth } from '@/features/auth/hooks/useAuth'
+import { leadService } from '../services/leadService'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { STATUS_LABELS, INDUSTRIES } from '@/lib/constants'
 import { MoreHorizontal, Plus, Users, Trash2, Edit } from 'lucide-react'
@@ -15,10 +17,23 @@ import type { LeadStatus, Lead } from '@/types'
 
 export function LeadsView() {
   const navigate = useNavigate()
-  const { leads, search, setSearch, statusFilter, setStatusFilter, deleteLead } = useLeadStore()
+  const { user } = useAuth()
+  const { leads, search, setSearch, statusFilter, setStatusFilter, removeLead, fetchLeads, setLeads } = useLeadStore()
   const [showForm, setShowForm] = useState(false)
   const [editingLead, setEditingLead] = useState<Lead | null>(null)
   const [openMenu, setOpenMenu] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!user) return
+
+    fetchLeads(user.id)
+
+    const unsubscribe = leadService.subscribe(user.id, (leads) => {
+      setLeads(leads)
+    })
+
+    return () => unsubscribe()
+  }, [user, fetchLeads, setLeads])
 
   const filteredLeads = leads.filter((lead) => {
     const matchesSearch = !search ||
@@ -35,9 +50,9 @@ export function LeadsView() {
     setOpenMenu(null)
   }
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Delete this lead?')) {
-      deleteLead(id)
+      await removeLead(id)
     }
     setOpenMenu(null)
   }

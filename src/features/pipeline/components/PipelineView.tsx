@@ -75,10 +75,10 @@ function PipelineColumn({ status, leads, onDrop }: { status: LeadStatus; leads: 
 }
 
 export function PipelineView() {
-  const { leads, updateStatus } = useLeadStore()
+  const { leads, changeStatus } = useLeadStore()
 
-  const handleDrop = (leadId: string, status: LeadStatus) => {
-    updateStatus(leadId, status)
+  const handleDrop = async (leadId: string, status: LeadStatus) => {
+    await changeStatus(leadId, status)
   }
 
   return (

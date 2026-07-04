@@ -3,6 +3,7 @@ import { Modal } from '@/components/ui/modal'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLeadStore } from '../store/useLeadStore'
+import { useAuth } from '@/features/auth/hooks/useAuth'
 import { INDUSTRIES, STATUS_LABELS } from '@/lib/constants'
 import type { Lead, LeadStatus } from '@/types'
 
@@ -13,7 +14,8 @@ interface LeadFormProps {
 }
 
 export function LeadForm({ open, onClose, lead }: LeadFormProps) {
-  const { addLead, updateLead } = useLeadStore()
+  const { createLead, editLead } = useLeadStore()
+  const { user } = useAuth()
   const isEditing = !!lead
 
   const [form, setForm] = useState({
@@ -31,35 +33,52 @@ export function LeadForm({ open, onClose, lead }: LeadFormProps) {
     notes: lead?.notes || '',
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitting, setSubmitting] = useState(false)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    setSubmitting(true)
 
-    const leadData: Lead = {
-      id: lead?.id || Date.now().toString(),
-      name: form.name,
-      email: form.email,
-      phone: form.phone,
-      company: form.company,
-      budget: parseInt(form.budget) || 0,
-      industry: form.industry,
-      serviceNeeded: form.serviceNeeded,
-      timeline: form.timeline,
-      status: form.status,
-      tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
-      notes: form.notes,
-      leadScore: lead?.leadScore || Math.floor(Math.random() * 40) + 10,
-      source: form.source,
-      createdAt: lead?.createdAt || new Date(),
-      updatedAt: new Date(),
-      userId: 'demo',
+    try {
+      if (isEditing) {
+        await editLead(lead.id, {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          budget: parseInt(form.budget) || 0,
+          industry: form.industry,
+          serviceNeeded: form.serviceNeeded,
+          timeline: form.timeline,
+          status: form.status,
+          tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+          notes: form.notes,
+          source: form.source,
+        })
+      } else {
+        await createLead({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          company: form.company,
+          budget: parseInt(form.budget) || 0,
+          industry: form.industry,
+          serviceNeeded: form.serviceNeeded,
+          timeline: form.timeline,
+          status: form.status,
+          tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
+          notes: form.notes,
+          leadScore: Math.floor(Math.random() * 40) + 10,
+          source: form.source,
+          userId: user?.id || '',
+        })
+      }
+      onClose()
+    } catch (error) {
+      console.error('Failed to save lead:', error)
+    } finally {
+      setSubmitting(false)
     }
-
-    if (isEditing) {
-      updateLead(lead.id, leadData)
-    } else {
-      addLead(leadData)
-    }
-    onClose()
   }
 
   return (
@@ -204,7 +223,7 @@ export function LeadForm({ open, onClose, lead }: LeadFormProps) {
 
         <div className="flex justify-end gap-3 pt-2">
           <Button type="button" variant="secondary" onClick={onClose}>Cancel</Button>
-          <Button type="submit">{isEditing ? 'Save Changes' : 'Add Lead'}</Button>
+          <Button type="submit" disabled={submitting}>{isEditing ? 'Save Changes' : 'Add Lead'}</Button>
         </div>
       </form>
     </Modal>
