@@ -27,7 +27,10 @@ export function LoginForm() {
       {/* Left - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-background items-center justify-center p-12">
         <div className="max-w-md">
-          <h1 className="text-3xl font-bold text-primary mb-4">LeadBoost AI</h1>
+          <div className="flex items-center gap-2 mb-4">
+            <img src="/logo.svg" alt="LeadBoost AI" className="h-8 w-8" />
+            <h1 className="text-3xl font-bold text-primary">LeadBoost AI</h1>
+          </div>
           <p className="text-xl text-primary mb-2">Never lose a lead again.</p>
           <p className="text-secondary">
             Capture, qualify, and convert leads faster with intelligent automation.
