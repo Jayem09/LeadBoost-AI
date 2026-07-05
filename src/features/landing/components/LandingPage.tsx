@@ -77,7 +77,7 @@ export function LandingPage() {
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-14 w-auto" />
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-20 w-auto" />
           </Link>
 
           {/* Desktop nav */}
@@ -123,7 +123,7 @@ export function LandingPage() {
             <div>
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold mb-6">
                 <Sparkles className="h-3.5 w-3.5" />
-                Now in public beta — free for small teams
+                Free for small teams
               </div>
               <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 tracking-tight leading-[1.05]">
                 Never lose a<br />
@@ -572,7 +572,7 @@ export function LandingPage() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
             <div className="col-span-2 md:col-span-1">
-              <img src="/Logo.png" alt="LeadBoost AI" className="h-10 w-auto mb-4 brightness-0 invert" />
+              <img src="/Logo.png" alt="LeadBoost AI" className="h-16 w-auto mb-4 brightness-0 invert" />
               <p className="text-sm text-gray-400 leading-relaxed">Capture, qualify, and convert leads faster with intelligent automation.</p>
             </div>
             <div>
