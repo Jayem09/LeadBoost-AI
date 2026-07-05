@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { supabase } from '@/lib/supabase'
 import {
-  Database, GitBranch, Zap, ArrowRight, CheckCircle2,
+  Database, Zap, ArrowRight, CheckCircle2,
   BarChart3, Users, Brain, ChevronDown, ChevronUp, Star, Quote, Sparkles, Target,
   TrendingUp, Layers, Rocket, Shield, Play, Menu, X
 } from 'lucide-react'
