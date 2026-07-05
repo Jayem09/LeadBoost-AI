@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { supabase } from '@/lib/supabase'
 import {
-  Database, GitBranch, Zap, ArrowRight, CheckCircle2, Mail, Building2, Phone, DollarSign,
+  Database, GitBranch, Zap, ArrowRight, CheckCircle2,
   BarChart3, Users, Brain, ChevronDown, ChevronUp, Star, Quote, Sparkles, Target,
   TrendingUp, Layers, Rocket, Shield, Play, Menu, X
 } from 'lucide-react'
@@ -139,7 +139,7 @@ export function LandingPage() {
                   </Button>
                 </a>
                 <Link to="/register">
-                  <Button size="lg" variant="outline" className="text-base px-8 h-12 border-gray-200 hover:bg-gray-50">
+                  <Button size="lg" variant="secondary" className="text-base px-8 h-12 border-gray-200 hover:bg-gray-50">
                     <Play className="h-4 w-4 mr-2" /> Watch Demo
                   </Button>
                 </Link>
@@ -500,7 +500,7 @@ export function LandingPage() {
               </Button>
             </a>
             <Link to="/pricing">
-              <Button size="lg" variant="outline" className="text-white border-indigo-400 hover:bg-indigo-500/30 text-base px-10 h-12">
+              <Button size="lg" variant="secondary" className="text-white border-indigo-400 hover:bg-indigo-500/30 text-base px-10 h-12">
                 View Pricing
               </Button>
             </Link>
