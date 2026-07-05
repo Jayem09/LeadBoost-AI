@@ -34,7 +34,7 @@ export function LoginForm() {
           <p className="text-secondary">
             Capture, qualify, and convert leads faster with intelligent automation.
           </p>
-          <p className="text-xs text-muted mt-8">Trusted by 500+ businesses worldwide</p>
+          <p className="text-xs text-muted mt-8">AI-powered lead management platform</p>
         </div>
       </div>
 

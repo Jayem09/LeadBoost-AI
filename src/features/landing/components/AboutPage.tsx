@@ -20,13 +20,6 @@ const values = [
   },
 ]
 
-const stats = [
-  { value: '500+', label: 'Businesses' },
-  { value: '50K+', label: 'Leads Managed' },
-  { value: '99.9%', label: 'Uptime' },
-  { value: '24/7', label: 'Support' },
-]
-
 export function AboutPage() {
   return (
     <div className="min-h-screen bg-background">
@@ -54,20 +47,6 @@ export function AboutPage() {
           LeadBoost AI was built to solve a simple problem: too many leads fall through the cracks.
           We give sales teams the tools to capture, track, and convert every opportunity.
         </p>
-      </section>
-
-      {/* Stats */}
-      <section className="border-y border-border">
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat) => (
-              <div key={stat.label} className="text-center">
-                <div className="text-3xl font-bold text-primary">{stat.value}</div>
-                <div className="text-sm text-secondary mt-1">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Mission */}
@@ -130,7 +109,7 @@ export function AboutPage() {
         <div className="max-w-2xl mx-auto px-6 py-20 text-center">
           <h2 className="text-2xl font-bold text-primary mb-4">Ready to get started?</h2>
           <p className="text-secondary mb-6">
-            Join 500+ businesses already using LeadBoost AI to close more deals.
+            Get started today.
           </p>
           <div className="flex items-center justify-center gap-3">
             <Link to="/register">

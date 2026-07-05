@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { supabase } from '@/lib/supabase'
 import {
   Database, Zap, ArrowRight, CheckCircle2,
-  BarChart3, Users, Brain, ChevronDown, ChevronUp, Star, Quote, Sparkles, Target,
+  BarChart3, Users, Brain, ChevronDown, ChevronUp, Sparkles, Target,
   TrendingUp, Layers, Rocket, Shield, Play, Menu, X
 } from 'lucide-react'
 
@@ -22,24 +22,6 @@ const steps = [
   { num: '01', icon: Rocket, title: 'Sign up — it\'s free', description: 'Create your account in 30 seconds. No credit card needed.' },
   { num: '02', icon: Target, title: 'Import your leads', description: 'Upload CSV, connect your website form, or add manually.' },
   { num: '03', icon: TrendingUp, title: 'Start closing deals', description: 'Use automation and AI scoring to convert faster.' },
-]
-
-const testimonials = [
-  {
-    name: 'Sarah Chen', role: 'Head of Sales', company: 'TechFlow Inc.', avatar: 'SC',
-    quote: '"Cut our follow-up time by 60% and closed 40% more deals in the first quarter. The pipeline view alone is worth it."',
-    rating: 5, color: '#6366f1'
-  },
-  {
-    name: 'Marcus Rivera', role: 'CEO', company: 'Growth Studio', avatar: 'MR',
-    quote: '"Switched from a $200/mo CRM. LeadBoost does everything better for a fraction of the price. Easy decision."',
-    rating: 5, color: '#10b981'
-  },
-  {
-    name: 'Emily Watson', role: 'Marketing Director', company: 'ScaleUp Co.', avatar: 'EW',
-    quote: '"I can see exactly where every lead is at a glance. No more lost opportunities slipping through the cracks."',
-    rating: 5, color: '#ec4899'
-  },
 ]
 
 const faqs = [
@@ -253,35 +235,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* ─── LOGOS ─── */}
-      <section className="border-y border-gray-100 bg-gray-50/50">
-        <div className="max-w-7xl mx-auto px-6 py-10">
-          <p className="text-center text-xs text-gray-400 font-medium uppercase tracking-widest mb-6">Trusted by sales teams worldwide</p>
-          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
-            {['TechFlow', 'Growth Studio', 'ScaleUp Co', 'CloudBase', 'DataSync', 'Nexus'].map((name) => (
-              <span key={name} className="text-lg font-bold text-gray-300 hover:text-gray-400 transition-colors">{name}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ─── STATS ─── */}
-      <section className="max-w-7xl mx-auto px-6 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {[
-            { value: '500+', label: 'Active Businesses', desc: 'And growing every day' },
-            { value: '50K+', label: 'Leads Managed', desc: 'Across all platforms' },
-            { value: '99.9%', label: 'Uptime SLA', desc: 'Enterprise reliability' },
-            { value: '4.9★', label: 'Average Rating', desc: 'From customer reviews' },
-          ].map((s) => (
-            <div key={s.label} className="text-center p-6 rounded-2xl bg-gray-50 border border-gray-100">
-              <div className="text-4xl font-bold text-gray-900">{s.value}</div>
-              <div className="text-sm font-semibold text-gray-700 mt-1">{s.label}</div>
-              <div className="text-xs text-gray-400 mt-0.5">{s.desc}</div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* ─── FEATURES ─── */}
       <section className="bg-gray-50/70 border-y border-gray-100">
@@ -404,40 +358,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* ─── TESTIMONIALS ─── */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold mb-4">
-            <Quote className="h-3 w-3" /> Testimonials
-          </div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Loved by sales teams</h2>
-          <p className="text-gray-500 max-w-xl mx-auto text-lg">Real feedback from real customers who transformed their sales process.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t) => (
-            <div key={t.name} className="rounded-2xl border border-gray-100 bg-white p-8 hover:shadow-lg hover:shadow-gray-100/50 transition-all duration-200">
-              <div className="flex gap-1 mb-4">
-                {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <p className="text-gray-700 leading-relaxed mb-6">{t.quote}</p>
-              <div className="flex items-center gap-3">
-                <div
-                  className="h-10 w-10 rounded-full flex items-center justify-center text-sm font-bold text-white"
-                  style={{ backgroundColor: t.color }}
-                >
-                  {t.avatar}
-                </div>
-                <div>
-                  <div className="text-sm font-semibold text-gray-900">{t.name}</div>
-                  <div className="text-xs text-gray-400">{t.role}, {t.company}</div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+
 
       {/* ─── FEATURE HIGHLIGHT SECTION ─── */}
       <section className="bg-gray-50/70 border-y border-gray-100">
@@ -496,7 +417,7 @@ export function LandingPage() {
         <div className="max-w-4xl mx-auto px-6 py-24 text-center">
           <h2 className="text-4xl font-bold text-white mb-4">Ready to boost your leads?</h2>
           <p className="text-indigo-200 text-lg max-w-xl mx-auto mb-10">
-            Join 500+ businesses already using LeadBoost AI to capture, manage, and convert more leads.
+            Join businesses already using LeadBoost AI to capture, manage, and convert more leads.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a href="#lead-form">
