@@ -2,6 +2,8 @@
 
 B2B SaaS lead management platform with automated workflows.
 
+**🌐 Live Demo:** [`https://leadboost-ai-alpha.vercel.app`](https://leadboost-ai-alpha.vercel.app)
+
 ## Architecture
 
 ```
