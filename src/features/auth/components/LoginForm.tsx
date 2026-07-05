@@ -28,7 +28,7 @@ export function LoginForm() {
       <div className="hidden lg:flex lg:w-1/2 bg-background items-center justify-center p-12">
         <div className="max-w-md">
           <div className="flex items-center gap-2 mb-4">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-20 w-auto mix-blend-multiply dark:mix-blend-screen" />
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-24 w-auto mix-blend-multiply dark:mix-blend-screen" />
           </div>
           <p className="text-xl text-primary mb-2">Never lose a lead again.</p>
           <p className="text-secondary">

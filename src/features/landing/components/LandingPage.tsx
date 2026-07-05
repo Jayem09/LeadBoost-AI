@@ -25,15 +25,21 @@ const steps = [
 ]
 
 const testimonials = [
-  { name: 'Sarah Chen', role: 'Head of Sales', company: 'TechFlow Inc.', avatar: 'SC',
+  {
+    name: 'Sarah Chen', role: 'Head of Sales', company: 'TechFlow Inc.', avatar: 'SC',
     quote: '"Cut our follow-up time by 60% and closed 40% more deals in the first quarter. The pipeline view alone is worth it."',
-    rating: 5, color: '#6366f1' },
-  { name: 'Marcus Rivera', role: 'CEO', company: 'Growth Studio', avatar: 'MR',
+    rating: 5, color: '#6366f1'
+  },
+  {
+    name: 'Marcus Rivera', role: 'CEO', company: 'Growth Studio', avatar: 'MR',
     quote: '"Switched from a $200/mo CRM. LeadBoost does everything better for a fraction of the price. Easy decision."',
-    rating: 5, color: '#10b981' },
-  { name: 'Emily Watson', role: 'Marketing Director', company: 'ScaleUp Co.', avatar: 'EW',
+    rating: 5, color: '#10b981'
+  },
+  {
+    name: 'Emily Watson', role: 'Marketing Director', company: 'ScaleUp Co.', avatar: 'EW',
     quote: '"I can see exactly where every lead is at a glance. No more lost opportunities slipping through the cracks."',
-    rating: 5, color: '#ec4899' },
+    rating: 5, color: '#ec4899'
+  },
 ]
 
 const faqs = [
@@ -77,7 +83,7 @@ export function LandingPage() {
       <nav className="sticky top-0 z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-20 w-auto" />
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-34 w-auto" />
           </Link>
 
           {/* Desktop nav */}
@@ -224,10 +230,9 @@ export function LandingPage() {
                           </div>
                         </div>
                         <div className="flex items-center gap-2">
-                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
-                            l.status === 'New' ? 'bg-emerald-50 text-emerald-700' :
-                            l.status === 'Meeting' ? 'bg-purple-50 text-purple-700' : 'bg-pink-50 text-pink-700'
-                          }`}>{l.status}</span>
+                          <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${l.status === 'New' ? 'bg-emerald-50 text-emerald-700' :
+                              l.status === 'Meeting' ? 'bg-purple-50 text-purple-700' : 'bg-pink-50 text-pink-700'
+                            }`}>{l.status}</span>
                           <span className="text-xs font-bold text-indigo-600">{l.score}</span>
                         </div>
                       </div>
