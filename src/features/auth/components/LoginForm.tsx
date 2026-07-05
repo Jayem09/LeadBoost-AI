@@ -26,11 +26,11 @@ export function LoginForm() {
     <div className="min-h-screen flex">
       {/* Left - Branding */}
       <div className="hidden lg:flex lg:w-1/2 bg-background items-center justify-center p-12">
-        <div className="max-w-md">
-          <div className="flex items-center gap-2 mb-4">
-            <img src="/Logo.png" alt="LeadBoost AI" className="h-24 w-auto mix-blend-multiply dark:mix-blend-screen" />
+        <div className="max-w-md pt-16">
+          <div className="h-16 overflow-hidden flex items-center">
+            <img src="/Logo.png" alt="LeadBoost AI" className="h-24 w-auto mix-blend-multiply dark:mix-blend-screen object-cover" />
           </div>
-          <p className="text-xl text-primary mb-2">Never lose a lead again.</p>
+          <p className="text-xl text-primary -mt-1">Never lose a lead again.</p>
           <p className="text-secondary">
             Capture, qualify, and convert leads faster with intelligent automation.
           </p>
